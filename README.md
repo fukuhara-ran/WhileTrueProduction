@@ -1,7 +1,31 @@
 # WhileTrueProduction
 
-# Directory Explanation
-TBA
+# Directories Explanation
+```
+|-->Assets: Folder kerja utama
+|  |-->Animations: Tempat menyimpan .anim
+|  |-->Fonts: Tempat menyimpan variasi huruf
+|  |-->Images: Folder Gambar
+|     |-->Bgs: Background
+|     |-->Characters: Karakter
+|     |-->Environments: Benda - benda sekitar
+|  |-->Scenes: Folder scene unity
+|     |-->Menu: Scene untuk menu dan setting
+|     |-->Platformer: Scene level platformer
+|     |-->Td: Scene level tower defense
+|     |-->Test: Scene coba-coba
+|  |-->Scripts: Folder script c#
+|     |-->Enemies: Script untuk pergerakan musuh
+|     |-->Environments: Script untuk benda - benda
+|     |-->Npcs: Script untuk karakter non playable
+|     |-->Player: Script untuk karakter playable
+|  |-->Sounds: Folder audio
+|     |-->Bgms: Suara background
+|     |-->Sfxs: Suara ceting2
+|-->Packages
+|-->ProjectSettings
+
+```
 
 # Sematic Commit Messages
 
