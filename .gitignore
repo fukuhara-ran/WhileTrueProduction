@@ -15,6 +15,7 @@
 /*.sln.DotSettings
 /*.userprefs
 /*.pidb
+.vsconfig
 
 # OS generated
 .DS_Store*
