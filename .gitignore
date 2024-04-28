@@ -26,3 +26,8 @@ ehthumbs.db
 Thumbs.db
 /.vs/
 **/*.meta
+
+# Assets
+**/*.png
+**/*.wav
+**/*.mp3
