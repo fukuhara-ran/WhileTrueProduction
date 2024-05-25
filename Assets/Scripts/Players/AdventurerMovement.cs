@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline.Actions;
@@ -19,6 +20,7 @@ public class AdventurerMovement : MonoBehaviour
     private bool isJumping;
     private bool isAttacking;
 
+    public event Action OnAttacking;
 
     private float horizontal;
     public float speed = 8f;
@@ -77,8 +79,9 @@ public class AdventurerMovement : MonoBehaviour
 
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            Debug.Log("isAttacking == " + isAttacking);
+            // Debug.Log("isAttacking == " + isAttacking);
             animator.SetBool("isAttacking", true);
+            OnAttacking.Invoke();
             DisableInput();
         }
         
@@ -106,7 +109,7 @@ public class AdventurerMovement : MonoBehaviour
     }
 
     void EndAttacking() {
-        Debug.Log("END ATTACKING");
+        // Debug.Log("END ATTACKING");
         animator.SetBool("isAttacking", false);
         EnableInput();
     }
