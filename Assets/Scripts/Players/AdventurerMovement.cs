@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline.Actions;
@@ -7,6 +8,8 @@ using UnityEngine.Video;
 
 public class AdventurerMovement : MonoBehaviour
 {
+    public Animator animator;
+
     public InputAction DoGoRight;
     public InputAction DoGoLeft;
     public InputAction DoJump;
@@ -17,12 +20,15 @@ public class AdventurerMovement : MonoBehaviour
     private bool isJumping;
     private bool isAttacking;
 
+    public event Action OnAttacking;
 
     private float horizontal;
     public float speed = 8f;
-    public float jumpingPower = 6f;
+    public float jumpingPower = 10f;
     private bool isFacingRight = true;
     private bool canDoubleJump = false;
+    public float attackCD = 1f;
+    private float nextAttack;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -35,62 +41,14 @@ public class AdventurerMovement : MonoBehaviour
 
     void OnEnable()
     {
-        DoGoRight.Enable();
-        DoGoLeft.Enable();
-        DoJump.Enable();
-        DoAttack.Enable();
-
-        DoGoRight.performed += (InputAction.CallbackContext context) =>
-        {
-            isMovingRight = true;
-            Debug.Log("Right Performed");
-        };
-        DoGoLeft.performed += (InputAction.CallbackContext context) =>
-        {
-            isMovingLeft = true;
-            Debug.Log("Left Performed");
-        };
-        DoJump.performed += (InputAction.CallbackContext context) =>
-        {
-            isJumping = true;
-            Debug.Log("Jump Performed");
-        };
-        DoAttack.performed += (InputAction.CallbackContext context) =>
-        {
-            isAttacking = true;
-            Debug.Log("Attack Performed");
-        };
-
-        DoGoRight.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isMovingRight = false;
-            Debug.Log("Right Cancelled");
-        };
-        DoGoLeft.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isMovingLeft = false; 
-            Debug.Log("Left Cancelled");
-        };
-        DoJump.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isJumping = false;
-            Debug.Log("Jump Cancelled");
-        };
-        DoAttack.canceled += (InputAction.CallbackContext context) =>
-        {
-            isAttacking = false;
-            Debug.Log("Attack Cancelled");
-        };
+        MapInput();
+        EnableInput();         
     }
 
     void OnDisable()
     {
-        DoGoRight.Disable();
-        DoGoLeft.Disable();
-        DoJump.Disable();
+        DisableInput();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isMovingRight)
@@ -113,9 +71,21 @@ public class AdventurerMovement : MonoBehaviour
         }
 
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        horizontal = 0f;
 
         Flip();
+
+        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+        animator.SetBool("isJumping", rb.velocity.y > 0);
+
+        if(isAttacking && Time.time >= nextAttack) {
+            nextAttack = Time.time + attackCD;
+            // Debug.Log("isAttacking == " + isAttacking);
+            animator.SetBool("isAttacking", true);
+            OnAttacking.Invoke();
+            DisableInput();
+        }
+        
+        horizontal = 0f;
     }
 
     void FixedUpdate()
@@ -136,5 +106,63 @@ public class AdventurerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    void EndAttacking() {
+        // Debug.Log("END ATTACKING");
+        animator.SetBool("isAttacking", false);
+        EnableInput();
+    }
+
+    private void MapInput() {
+        DoGoRight.performed += (InputAction.CallbackContext context) =>
+        {
+            isMovingRight = true;
+        };
+        DoGoRight.canceled += (InputAction.CallbackContext context) => 
+        { 
+            isMovingRight = false;
+        };
+
+        DoGoLeft.performed += (InputAction.CallbackContext context) =>
+        {
+            isMovingLeft = true;
+        };
+        DoGoLeft.canceled += (InputAction.CallbackContext context) => 
+        { 
+            isMovingLeft = false; 
+        };
+
+        DoJump.performed += (InputAction.CallbackContext context) =>
+        {
+            isJumping = true;
+        };
+        DoJump.canceled += (InputAction.CallbackContext context) => 
+        { 
+            isJumping = false;
+        };
+
+        DoAttack.performed += (InputAction.CallbackContext context) =>
+        {
+            isAttacking = true;
+        };
+        DoAttack.canceled += (InputAction.CallbackContext context) =>
+        {
+            isAttacking = false;
+        };  
+    }
+
+    private void EnableInput() {
+        DoGoRight.Enable();
+        DoGoLeft.Enable();
+        DoJump.Enable();
+        DoAttack.Enable();
+    }
+
+    private void DisableInput() {
+        DoGoRight.Disable();
+        DoGoLeft.Disable();
+        DoJump.Disable();
+        DoAttack.Disable();
     }
 }
