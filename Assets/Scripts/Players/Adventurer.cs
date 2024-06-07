@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
 
-public class AdventurerMovement : MonoBehaviour
+public class Adventurer : MonoBehaviour
 {
     public Animator animator;
 
@@ -14,18 +14,21 @@ public class AdventurerMovement : MonoBehaviour
     public InputAction DoGoLeft;
     public InputAction DoJump;
     public InputAction DoAttack;
+    public Collider2D AttackCollider;
+    private ContactFilter2D contactFilter2D = new();
+
+    public int Damage = 50;
 
     private bool isMovingRight;
     private bool isMovingLeft;
     private bool isJumping;
     private bool isAttacking;
 
-    public event Action OnAttacking;
-
     private float horizontal;
-    public float speed = 8f;
-    public float jumpingPower = 10f;
-    private bool isFacingRight = true;
+    public float speed = 4f;
+    public float jumpingPower = 6f;
+    private Vector3 facingRight;
+    private Vector3 facingLeft;
     private bool canDoubleJump = false;
     public float attackCD = 1f;
     private float nextAttack;
@@ -35,29 +38,33 @@ public class AdventurerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        facingRight = transform.localScale;
+        facingLeft = facingRight;
+        facingLeft.x *= -1;
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         MapInput();
         EnableInput();         
     }
 
-    void OnDisable()
-    {
+    void OnDisable() {
         DisableInput();
     }
-    void Update()
-    {
-        if (isMovingRight)
-        {
+    void Update() {
+        
+    }
+
+    void FixedUpdate() {
+        if (isMovingRight) {
             horizontal = 1f;
+            FlipRight();
+            
         }
-        else if (isMovingLeft)
-        {
+        else if (isMovingLeft) {
             horizontal = -1f;
+            FlipLeft();
         }
 
         if (isJumping)
@@ -72,39 +79,56 @@ public class AdventurerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
-        Flip();
-
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
         animator.SetBool("isJumping", rb.velocity.y > 0);
 
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            // Debug.Log("isAttacking == " + isAttacking);
             animator.SetBool("isAttacking", true);
-            OnAttacking.Invoke();
+            Attack();
             DisableInput();
         }
         
-        horizontal = 0f;
+        if(!IsGrounded()) {
+            if(horizontal > 0f) {
+                horizontal -= 0.05f;
+            }
+
+            if(horizontal < 0f) {
+                horizontal += 0.05f;
+            } 
+        } else {
+            horizontal = 0f;
+        }
+        
     }
 
-    void FixedUpdate()
-    {
+    private void Attack() {
+        List<Collider2D> enemies = new();
+        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, enemies);
+
+        int i = 0;
+        foreach(var enemy in enemies) {
+            if(enemy.GetComponent<Enemy>() != null) {
+                enemy.transform.GetComponent<Enemy>().Damaged(Damage);
+                i++;
+            }
+        }
+        // Debug.Log("Enemies caught===="+i);
     }
 
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+    private void FlipRight() {
+        if(transform.localScale.Equals(facingLeft)) {
+            transform.localScale = facingRight;
+        }
+    }
+    private void FlipLeft() {
+        if(transform.localScale.Equals(facingRight)) {
+            transform.localScale = facingLeft;
         }
     }
 
-    private bool IsGrounded()
-    {
+    private bool IsGrounded() {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
