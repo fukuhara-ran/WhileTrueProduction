@@ -9,7 +9,7 @@ public class ParallaxBg : MonoBehaviour
     public float parallaxEffectMultiplier;
 
     private Transform[] layers;
-    private float viewZone = 1.0f;
+    private float viewZone = 0.0f;
     private int leftIndex;
     private int rightIndex;
     private float backgroundSize;
