@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.32, y: 3.599, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7667545180221936338}
@@ -357,9 +357,9 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   AttackCollider: {fileID: 454132713931229736}
-  Damage: 50
+  Damage: 33
   speed: 4
-  jumpingPower: 6
+  jumpingPower: 8
   attackCD: 1
   rb: {fileID: 837188952607969564}
   groundCheck: {fileID: 7667545180221936338}
@@ -391,7 +391,7 @@ Transform:
   m_GameObject: {fileID: 6085376502534640756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.13, z: 0}
+  m_LocalPosition: {x: 0, y: -0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
