@@ -10,6 +10,8 @@ public class Adventurer : MonoBehaviour
 {
     public Animator animator;
 
+    public int HealthPoint = 100;
+    
     public InputAction DoGoRight;
     public InputAction DoGoLeft;
     public InputAction DoJump;
