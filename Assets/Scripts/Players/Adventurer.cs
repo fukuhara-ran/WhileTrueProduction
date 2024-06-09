@@ -48,7 +48,6 @@ public class Adventurer : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    // Start is called before the first frame update
     void Start() {
         facingRight = transform.localScale;
         facingLeft = facingRight;
@@ -128,14 +127,11 @@ public class Adventurer : MonoBehaviour
         List<Collider2D> enemies = new();
         Physics2D.OverlapCollider(AttackCollider, contactFilter2D, enemies);
 
-        int i = 0;
         foreach(var enemy in enemies) {
             if(enemy.GetComponent<Enemy>() != null) {
                 enemy.transform.GetComponent<Enemy>().Damaged(Damage);
-                i++;
             }
         }
-        // Debug.Log("Enemies caught===="+i);
     }
 
     public void Damaged(int damage) {
@@ -163,7 +159,6 @@ public class Adventurer : MonoBehaviour
     }
 
     void EndAttacking() {
-        // Debug.Log("END ATTACKING");
         animator.SetBool("isAttacking", false);
         EnableInput();
     }
