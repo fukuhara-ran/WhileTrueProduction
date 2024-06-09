@@ -331,6 +331,31 @@ MonoBehaviour:
       m_Action: Do Attack
       m_Flags: 0
     m_Flags: 0
+  DoSlide:
+    m_Name: Do Slide
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 01eab28f-03af-4ff6-b2d9-09e14a7471aa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d8e26ecd-6b30-4132-a50a-c1b6547d83c9
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Slide
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 01403896-0392-4d3c-9358-38b541d01ac7
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Slide
+      m_Flags: 0
+    m_Flags: 0
   AttackCollider: {fileID: 454132713931229736}
   Damage: 50
   speed: 4
