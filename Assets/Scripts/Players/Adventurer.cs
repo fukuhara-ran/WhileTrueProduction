@@ -10,10 +10,13 @@ public class Adventurer : MonoBehaviour
 {
     public Animator animator;
 
+    public int HealthPoint = 100;
+    
     public InputAction DoGoRight;
     public InputAction DoGoLeft;
     public InputAction DoJump;
     public InputAction DoAttack;
+    public InputAction DoSlide;
     public Collider2D AttackCollider;
     private ContactFilter2D contactFilter2D = new();
 
@@ -22,6 +25,8 @@ public class Adventurer : MonoBehaviour
     private bool isMovingRight;
     private bool isMovingLeft;
     private bool isJumping;
+    private bool isSliding;    
+    private bool isStillSliding = false;    
     private bool isAttacking;
 
     private float horizontal;
@@ -32,6 +37,8 @@ public class Adventurer : MonoBehaviour
     private bool canDoubleJump = false;
     public float attackCD = 1f;
     private float nextAttack;
+    private float slideCD = 4f;
+    private float nextSlide;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -77,30 +84,40 @@ public class Adventurer : MonoBehaviour
             }
         }
 
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-
-        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
-        animator.SetBool("isJumping", rb.velocity.y > 0);
-
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", true);
+            animator.SetBool("isAttacking", isAttacking);
             Attack();
             DisableInput();
         }
-        
+
+        if(isSliding && Time.time >= nextSlide) {
+            nextSlide = Time.time + slideCD;
+            animator.SetBool("isSliding", isSliding);
+            horizontal = isMovingLeft ? -2f : 2f;
+            isStillSliding = true;
+            DisableInput();
+        }
+
+        Move(horizontal);
+
         if(!IsGrounded()) {
             if(horizontal > 0f) {
-                horizontal -= 0.05f;
+                horizontal -= 0.01f;
             }
 
             if(horizontal < 0f) {
-                horizontal += 0.05f;
+                horizontal += 0.01f;
             } 
         } else {
-            horizontal = 0f;
+            if(!isStillSliding) {
+                horizontal = 0f;
+            }
         }
-        
+
+        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+        animator.SetBool("isJumping", rb.velocity.y > 0);
+        animator.SetBool("isFalling", rb.velocity.y < 0);
     }
 
     private void Attack() {
@@ -115,6 +132,10 @@ public class Adventurer : MonoBehaviour
             }
         }
         // Debug.Log("Enemies caught===="+i);
+    }
+
+    private void Move(float multiplier) {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     private void FlipRight() {
@@ -137,43 +158,27 @@ public class Adventurer : MonoBehaviour
         animator.SetBool("isAttacking", false);
         EnableInput();
     }
+    void EndSliding() {
+        animator.SetBool("isSliding", false);
+        isStillSliding = false;
+        EnableInput();
+    }
 
     private void MapInput() {
-        DoGoRight.performed += (InputAction.CallbackContext context) =>
-        {
-            isMovingRight = true;
-        };
-        DoGoRight.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isMovingRight = false;
-        };
+        DoGoRight.performed += (InputAction.CallbackContext context) => {isMovingRight = true;};
+        DoGoRight.canceled += (InputAction.CallbackContext context) => {isMovingRight = false;};
 
-        DoGoLeft.performed += (InputAction.CallbackContext context) =>
-        {
-            isMovingLeft = true;
-        };
-        DoGoLeft.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isMovingLeft = false; 
-        };
+        DoGoLeft.performed += (InputAction.CallbackContext context) =>{isMovingLeft = true;};
+        DoGoLeft.canceled += (InputAction.CallbackContext context) => {isMovingLeft = false;};
 
-        DoJump.performed += (InputAction.CallbackContext context) =>
-        {
-            isJumping = true;
-        };
-        DoJump.canceled += (InputAction.CallbackContext context) => 
-        { 
-            isJumping = false;
-        };
+        DoJump.performed += (InputAction.CallbackContext context) =>{isJumping = true;};
+        DoJump.canceled += (InputAction.CallbackContext context) => {isJumping = false;};
 
-        DoAttack.performed += (InputAction.CallbackContext context) =>
-        {
-            isAttacking = true;
-        };
-        DoAttack.canceled += (InputAction.CallbackContext context) =>
-        {
-            isAttacking = false;
-        };  
+        DoAttack.performed += (InputAction.CallbackContext context) =>{isAttacking = true;};
+        DoAttack.canceled += (InputAction.CallbackContext context) =>{isAttacking = false;};
+
+        DoSlide.performed += (InputAction.CallbackContext context) => {isSliding = true;};
+        DoSlide.canceled += (InputAction.CallbackContext context) => {isSliding = false;};
     }
 
     private void EnableInput() {
@@ -181,6 +186,7 @@ public class Adventurer : MonoBehaviour
         DoGoLeft.Enable();
         DoJump.Enable();
         DoAttack.Enable();
+        DoSlide.Enable();
     }
 
     private void DisableInput() {
@@ -188,5 +194,6 @@ public class Adventurer : MonoBehaviour
         DoGoLeft.Disable();
         DoJump.Disable();
         DoAttack.Disable();
+        DoSlide.Disable();
     }
 }
