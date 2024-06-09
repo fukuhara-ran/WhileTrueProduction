@@ -9,6 +9,7 @@
 |     |-->Bgs: Background
 |     |-->Characters: Karakter
 |     |-->Environments: Benda - benda sekitar
+|  |-->Prefabs: Untuk menyimpan prefab object apapun
 |  |-->Scenes: Folder scene unity
 |     |-->Menu: Scene untuk menu dan setting
 |     |-->Platformer: Scene level platformer
