@@ -28,10 +28,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    private ContactFilter2D contactFilter2D = new();
+    public Collider2D DetectPlayer;
+    private Transform player;
+
+    private Vector3 facingRight;
+    private Vector3 facingLeft;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        facingRight = transform.localScale;
+        facingLeft = facingRight;
+        facingLeft.x *= -1;
     }
 
     public void Damaged(int damage) {
@@ -57,9 +66,62 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        isMovingRight = false;
+        isMovingLeft = false;
+        horizontal = 0;
+
+        GetPlayer();
+        if(player != null) {
+            if(player.position.x > transform.position.x) {
+                isMovingRight = true;
+                isMovingLeft = false;
+            } else {
+                isMovingRight = false;
+                isMovingLeft = true;
+            }
+        }
+
+        if (isMovingRight) {
+            horizontal = 1f;
+            FlipRight();
+        } else if (isMovingLeft) {
+            horizontal = -1f;
+            FlipLeft();
+        }
+
+        Move(horizontal);
+
         if(HealthPoint <= 0) {
             Dead();
         }
+
+        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+    }
+
+    private void GetPlayer() {
+        List<Collider2D> players = new();
+        Physics2D.OverlapCollider(DetectPlayer, contactFilter2D, players);
+        player = null;
+        foreach(var p in players) {
+            if(p.GetComponent<Adventurer>() != null) {
+                player = p.transform;
+            }
+        }
+    }
+
+    private void FlipRight() {
+        if(transform.localScale.Equals(facingLeft)) {
+            transform.localScale = facingRight;
+        }
+    }
+    private void FlipLeft() {
+        if(transform.localScale.Equals(facingRight)) {
+            transform.localScale = facingLeft;
+        }
+    }
+
+    private void Move(float multiplier) {
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     private bool IsGrounded()
