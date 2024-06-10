@@ -29,6 +29,10 @@ public class Adventurer : MonoBehaviour
     private bool isStillSliding = false;    
     private bool isAttacking;
 
+    public bool getIsAttacking() {
+        return isAttacking;
+    }
+
     private float horizontal;
     public float speed = 4f;
     public float jumpingPower = 6f;
@@ -132,6 +136,11 @@ public class Adventurer : MonoBehaviour
             }
         }
         // Debug.Log("Enemies caught===="+i);
+    }
+
+    public void Damaged(int damage) {
+        HealthPoint -= damage;
+        Debug.Log("HP====" + HealthPoint);
     }
 
     private void Move(float multiplier) {
