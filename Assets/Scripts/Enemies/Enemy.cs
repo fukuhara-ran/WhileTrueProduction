@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private bool isMovingLeft;
     private bool isJumping;
     private bool isAttacking;
+    public int Damage = 50;
 
     private float horizontal;
     public float speed = 4f;
@@ -30,7 +31,8 @@ public class Enemy : MonoBehaviour
 
     private ContactFilter2D contactFilter2D = new();
     public Collider2D DetectPlayer;
-    private Transform player;
+    public Collider2D AttackCollider;
+    private Adventurer player;
 
     private Vector3 facingRight;
     private Vector3 facingLeft;
@@ -72,13 +74,23 @@ public class Enemy : MonoBehaviour
 
         GetPlayer();
         if(player != null) {
-            if(player.position.x > transform.position.x) {
+            if(player.transform.position.x > transform.position.x) {
                 isMovingRight = true;
                 isMovingLeft = false;
             } else {
                 isMovingRight = false;
                 isMovingLeft = true;
             }
+
+            if(player.getIsAttacking()){
+                isAttacking = true;
+            }
+        }
+
+        if(isAttacking && Time.time >= nextAttack) {
+            nextAttack = Time.time + attackCD;
+            animator.SetBool("isAttacking", true);
+            Attack();
         }
 
         if (isMovingRight) {
@@ -104,9 +116,25 @@ public class Enemy : MonoBehaviour
         player = null;
         foreach(var p in players) {
             if(p.GetComponent<Adventurer>() != null) {
-                player = p.transform;
+                player = p.transform.GetComponent<Adventurer>();
             }
         }
+    }
+
+    private void Attack() {
+        List<Collider2D> enemies = new();
+        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, enemies);
+
+        foreach(var enemy in enemies) {
+            if(enemy.GetComponent<Adventurer>() != null) {
+                enemy.transform.GetComponent<Enemy>().Damaged(Damage);
+            }
+        }
+    }
+
+    void EndAttacking() {
+        animator.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
     private void FlipRight() {
