@@ -131,6 +131,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5871389966501274816, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
+      propertyPath: m_Size.x
+      value: 0.48679924
+      objectReference: {fileID: 0}
+    - target: {fileID: -5871389966501274816, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
+      propertyPath: m_Size.y
+      value: 0.41395485
+      objectReference: {fileID: 0}
+    - target: {fileID: -5871389966501274816, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.016555548
+      objectReference: {fileID: 0}
+    - target: {fileID: -5871389966501274816, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.013244569
+      objectReference: {fileID: 0}
     - target: {fileID: 4910674827904899798, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_Name
       value: Dajjal
