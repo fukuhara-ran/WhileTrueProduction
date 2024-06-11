@@ -1,5 +1,14 @@
 # WhileTrueProduction
-
+Repositori ini berisi tugas project untuk keperluan mata kuliah Proyek Game & Proyek Pemrograman
+## Anggota
+| Nama                       | NIM        |
+|----------------------------|------------|
+| Abdurrahman Ridho          | 21.11.4341 |
+| Mohammad Doddy Sujatmiko   | 21.11.4344 |
+| Reksa Panduasa             | 21.11.4352 |
+| Muhammad Zhafar Al Fathi   | 21.11.4374 |
+| Dicky Akbar Baihaqki       | 21.11.4396 |
+| Ainnuna Elya Khansa        | 21.11.4179 |
 # Directories Explanation
 ```
 |-->Assets: Folder kerja utama
