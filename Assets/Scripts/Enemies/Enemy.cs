@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
     private bool isMovingRight;
     private bool isMovingLeft;
     private bool isJumping;
-    private bool isAttacking;
+    private bool isAttacking = false;
+    private bool isAttacked;
     public int Damage = 50;
 
     private float horizontal;
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour
 
     public void Damaged(int damage) {
         HealthPoint -= damage;
+        isAttacked = true;
         Debug.Log("HP====" + HealthPoint);
     }
 
@@ -70,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         isMovingRight = false;
         isMovingLeft = false;
+        isAttacked = false;
         horizontal = 0;
 
         GetPlayer();
