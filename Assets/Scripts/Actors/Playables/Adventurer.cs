@@ -1,69 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Video;
 
-public class Adventurer : MonoBehaviour
-{
-    public Animator animator;
-
-    public int HealthPoint = 100;
-    
+public class Adventurer : Actor {
     public InputAction DoGoRight;
     public InputAction DoGoLeft;
     public InputAction DoJump;
     public InputAction DoAttack;
     public InputAction DoSlide;
-    public Collider2D AttackCollider;
-    private ContactFilter2D contactFilter2D = new();
 
-    public int Damage = 50;
-
-    private bool isMovingRight;
-    private bool isMovingLeft;
-    private bool isJumping;
-    private bool isSliding;    
-    private bool isStillSliding = false;    
-    private bool isAttacking;
-
-    public bool getIsAttacking() {
-        return isAttacking;
-    }
-
-    private float horizontal;
-    public float speed = 4f;
-    public float jumpingPower = 6f;
-    private Vector3 facingRight;
-    private Vector3 facingLeft;
-    private bool canDoubleJump = false;
-    public float attackCD = 1f;
-    private float nextAttack;
-    private float slideCD = 4f;
+    private bool isSliding;
+    private bool canDoubleJump;
     private float nextSlide;
-
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-
-    void Start() {
-        facingRight = transform.localScale;
-        facingLeft = facingRight;
-        facingLeft.x *= -1;
-    }
+    private float slideCD;
+    private bool isStillSliding;
 
     void OnEnable() {
         MapInput();
-        EnableInput();         
+        EnableInput();
     }
 
     void OnDisable() {
         DisableInput();
-    }
-    void Update() {
-        
     }
 
     void FixedUpdate() {
@@ -123,45 +80,11 @@ public class Adventurer : MonoBehaviour
         animator.SetBool("isFalling", rb.velocity.y < 0);
     }
 
-    private void Attack() {
-        List<Collider2D> enemies = new();
-        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, enemies);
-
-        foreach(var enemy in enemies) {
-            if(enemy.GetComponent<Enemy>() != null) {
-                enemy.transform.GetComponent<Enemy>().Damaged(Damage);
-            }
-        }
-    }
-
-    public void Damaged(int damage) {
-        HealthPoint -= damage;
-        Debug.Log("HP====" + HealthPoint);
-    }
-
-    private void Move(float multiplier) {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-    }
-
-    private void FlipRight() {
-        if(transform.localScale.Equals(facingLeft)) {
-            transform.localScale = facingRight;
-        }
-    }
-    private void FlipLeft() {
-        if(transform.localScale.Equals(facingRight)) {
-            transform.localScale = facingLeft;
-        }
-    }
-
-    private bool IsGrounded() {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
-
     void EndAttacking() {
         animator.SetBool("isAttacking", false);
         EnableInput();
     }
+
     void EndSliding() {
         animator.SetBool("isSliding", false);
         isStillSliding = false;
