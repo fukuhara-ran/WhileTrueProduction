@@ -8,6 +8,10 @@ public class Adventurer : Actor {
     public InputAction DoAttack;
     public InputAction DoSlide;
 
+    public int JumpCost = 20;
+    public int AttackCost = 20;
+    public int SlideCost = 40;
+
     private bool isSliding;
     private bool canDoubleJump;
     private float nextSlide;
@@ -24,39 +28,14 @@ public class Adventurer : Actor {
     }
 
     void FixedUpdate() {
+        //Movement
         if (isMovingRight) {
             horizontal = 1f;
             FlipRight();
-            
         }
         else if (isMovingLeft) {
             horizontal = -1f;
             FlipLeft();
-        }
-
-        if (isJumping)
-        {
-            if (IsGrounded() || canDoubleJump)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-                isJumping = false;
-                canDoubleJump = !canDoubleJump;
-            }
-        }
-
-        if(isAttacking && Time.time >= nextAttack) {
-            nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", isAttacking);
-            Attack();
-            DisableInput();
-        }
-
-        if(isSliding && Time.time >= nextSlide) {
-            nextSlide = Time.time + slideCD;
-            animator.SetBool("isSliding", isSliding);
-            horizontal = isMovingLeft ? -2f : 2f;
-            isStillSliding = true;
-            DisableInput();
         }
 
         Move(horizontal);
@@ -69,15 +48,46 @@ public class Adventurer : Actor {
             if(horizontal < 0f) {
                 horizontal += 0.01f;
             } 
-        } else {
-            if(!isStillSliding) {
-                horizontal = 0f;
+        } else if(!isStillSliding){
+            horizontal = 0;
+        }
+
+        //Jump
+        if (isJumping)
+        {
+            if (IsGrounded() || canDoubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                isJumping = false;
+                canDoubleJump = !canDoubleJump;
             }
         }
 
+        //Attack
+        if(isAttacking && Time.time >= nextAttack) {
+            nextAttack = Time.time + attackCD;
+            animator.SetBool("isAttacking", true);
+            Attack();
+            DisableInput();
+        }
+
+        //Slide
+        if(isSliding && Time.time >= nextSlide) {
+            nextSlide = Time.time + slideCD;
+            animator.SetBool("isSliding", false);
+            horizontal = isMovingLeft ? -2f : 2f;
+            isStillSliding = true;
+            DisableInput();
+        }
+
+        //Animation
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
         animator.SetBool("isJumping", rb.velocity.y > 0);
         animator.SetBool("isFalling", rb.velocity.y < 0);
+    }
+
+    public float HorizontalDistanceFrom(Vector3 position) {
+        return position.x - transform.position.x;
     }
 
     void EndAttacking() {

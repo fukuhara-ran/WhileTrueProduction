@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5805657957977748866}
   - component: {fileID: 747631780459020635}
   - component: {fileID: 8645595934454889002}
-  - component: {fileID: 4228064377819845489}
+  - component: {fileID: 4189778150076542367}
   m_Layer: 0
   m_Name: Jerangkong
   m_TagString: Enemy
@@ -211,11 +211,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 6969
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: eb4921cdf27206144a828ff38536c7a7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -258,7 +258,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06278843, y: -0.0043846816}
+  m_Offset: {x: 0.06278847, y: -0.0043846965}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -269,7 +269,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33392966, y: 0.5220946}
+  m_Size: {x: 0.18144807, y: 0.5220946}
   m_EdgeRadius: 0
 --- !u!95 &8645595934454889002
 Animator:
@@ -292,7 +292,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4228064377819845489
+--- !u!114 &4189778150076542367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,20 +304,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fba6f53ef44b64b9848c6987ec0f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8645595934454889002}
   HealthPoint: 100
-  Damage: 50
-  speed: 1
-  jumpingPower: 10
+  StaminaPoint: 100
+  Damage: 33
+  speed: 4
+  jumpingPower: 6
   attackCD: 1
   rb: {fileID: 5805657957977748866}
-  bc: {fileID: 747631780459020635}
   groundCheck: {fileID: 5017065599353816458}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  DetectPlayer: {fileID: 2806673797504911157}
   AttackCollider: {fileID: 2186759200662985813}
+  animator: {fileID: 8645595934454889002}
 --- !u!1 &8413553062090562867
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +328,7 @@ GameObject:
   - component: {fileID: 6720416451350904361}
   - component: {fileID: 2186759200662985813}
   m_Layer: 0
-  m_Name: HitBox
+  m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

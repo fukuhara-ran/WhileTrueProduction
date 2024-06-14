@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.ShaderKeywordFilter;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Actor : MonoBehaviour {
@@ -14,7 +17,7 @@ public class Actor : MonoBehaviour {
     protected bool isMovingRight;
     protected bool isMovingLeft;
     protected bool isJumping;
-    protected bool isAttacking;
+    public bool isAttacking;
     protected bool isAttacked;
     protected float horizontal;
     protected Vector3 facingRight;
@@ -39,11 +42,13 @@ public class Actor : MonoBehaviour {
 
     protected void Attack() {
         List<Collider2D> actors = new();
-        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
+        int i = Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
+        Debug.Log("caught ====" + i);
 
         foreach(var actor in actors) {
-            if(actor.GetComponent<Actor>() != null) {
+            if(actor.GetComponent<Actor>() != null && !actor.CompareTag(tag)) {
                 actor.transform.GetComponent<Actor>().Damaged(Damage);
+                Debug.Log("Damaging " + actor.tag);
             }
         }
     }
@@ -54,6 +59,7 @@ public class Actor : MonoBehaviour {
 
     protected void EndAttacking() {
         animator.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
     protected void FlipRight() {
