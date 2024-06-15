@@ -15,6 +15,7 @@ public class Actor : MonoBehaviour {
 
     protected bool isMovingRight;
     protected bool isMovingLeft;
+    protected bool isFacingRight;
     protected bool isJumping;
     protected bool isAttacking;
     [NonSerialized] public UnityEvent onAttacking = new();
@@ -67,12 +68,14 @@ public class Actor : MonoBehaviour {
     protected void FlipRight() {
         if(transform.localScale.Equals(facingLeft)) {
             transform.localScale = facingRight;
+            isFacingRight = true;
         }
     }
 
     protected void FlipLeft() {
         if(transform.localScale.Equals(facingRight)) {
             transform.localScale = facingLeft;
+            isFacingRight = false;
         }
     }
 
