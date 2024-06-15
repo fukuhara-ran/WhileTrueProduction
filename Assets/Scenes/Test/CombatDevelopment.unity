@@ -137,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.48
+      value: 23.88
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.75
+      value: 9.63
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.z
@@ -194,11 +194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.55
+      value: 24.32
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.37
+      value: 13.45
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -247,11 +247,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.48
+      value: 23.36
       objectReference: {fileID: 0}
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 2.62
       objectReference: {fileID: 0}
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.z
@@ -294,6 +294,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
+--- !u!61 &619011945 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2806673797504911157, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
+  m_PrefabInstance: {fileID: 2137122087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &677947221
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,11 +531,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.96
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.5
+      value: -9.08
       objectReference: {fileID: 0}
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -571,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 4189778150076542367, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: PlayerDetectorCollision
       value: 
-      objectReference: {fileID: 427284710}
+      objectReference: {fileID: 619011945}
     - target: {fileID: 6117403175744664141, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_Name
       value: Jerangkong

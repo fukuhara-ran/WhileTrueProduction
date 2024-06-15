@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Xml.Serialization;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Jerangkong : Enemy {
@@ -11,21 +11,22 @@ public class Jerangkong : Enemy {
         isMovingLeft = false;
         isAttacked = false;
         horizontal = 0;
-        adventurer = null;
 
         GetPlayer();
 
         if(adventurer != null) {
-            if(adventurer.HorizontalDistanceFrom(transform.position) < -3f) {
+            float playerDistance = adventurer.HorizontalDistanceFrom(transform.position);
+            if(playerDistance < -3f) {
                 isMovingRight = true;
                 isMovingLeft = false;
-            } else if(adventurer.HorizontalDistanceFrom(transform.position) > 3f){
+            } else if(playerDistance > 3f){
                 isMovingRight = false;
                 isMovingLeft = true;
             }
 
-            if(adventurer.isAttacking){
-                isAttacking = true;
+            if(math.abs(playerDistance) > 10f) {
+                adventurer.onAttacking.RemoveListener(this.CounterAttack);
+                adventurer = null;
             }
         }
 
@@ -51,14 +52,23 @@ public class Jerangkong : Enemy {
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
+    private void CounterAttack() {
+        if(UnityEngine.Random.Range(1,10) < 11) {
+            isAttacking = true;
+        }
+    }
+
     private void GetPlayer() {
+        if(adventurer != null) return;
         List<Collider2D> players = new();
         Physics2D.OverlapCollider(PlayerDetectorCollision, contactFilter2D, players);
         foreach(var p in players) {
             if(p.GetComponent<Adventurer>() != null) {
                 adventurer = p.transform.GetComponent<Adventurer>();
+                adventurer.onAttacking.AddListener(this.CounterAttack);
             }
         }
+
     }
 
     private void Reset() {

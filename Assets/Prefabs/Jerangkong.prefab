@@ -317,6 +317,8 @@ MonoBehaviour:
     m_Bits: 64
   AttackCollider: {fileID: 2186759200662985813}
   animator: {fileID: 8645595934454889002}
+  adventurer: {fileID: 0}
+  PlayerDetectorCollision: {fileID: 2806673797504911157}
 --- !u!1 &8413553062090562867
 GameObject:
   m_ObjectHideFlags: 0
