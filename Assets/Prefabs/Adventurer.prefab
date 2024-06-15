@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &736412770644628135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4072457295109374101}
+  - component: {fileID: 944973014759591005}
+  m_Layer: 0
+  m_Name: AirAttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4072457295109374101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736412770644628135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7502014077200124332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &944973014759591005
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736412770644628135}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.08932358, y: 0.13528118}
+      - {x: 0.008912623, y: 0.15033054}
+      - {x: 0.07268493, y: 0.11174604}
+      - {x: 0.16247836, y: 0.03768453}
+      - {x: 0.14882556, y: 0.00049212575}
+      - {x: 0.059687316, y: -0.014530182}
+      - {x: -0.058985204, y: 0.00661245}
+      - {x: -0.16522941, y: 0.119181365}
+      - {x: -0.2292118, y: 0.13362029}
+      - {x: -0.22769958, y: 0.07863}
+      - {x: -0.1148231, y: -0.025436819}
+      - {x: 0.035992295, y: -0.076028556}
+      - {x: 0.15266286, y: -0.06890586}
+      - {x: 0.21122316, y: -0.04019904}
+      - {x: 0.23187855, y: 0.02488178}
+      - {x: 0.19421417, y: 0.07592124}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2196825457060732795
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,9 +105,8 @@ GameObject:
   - component: {fileID: 3490832352532145397}
   - component: {fileID: 837188952607969564}
   - component: {fileID: 952105657224244051}
-  - component: {fileID: 454132713931229736}
   - component: {fileID: 3438191634389661829}
-  - component: {fileID: 5807830967076069199}
+  - component: {fileID: 865626958391183348}
   m_Layer: 0
   m_Name: Adventurer
   m_TagString: Player
@@ -36,6 +128,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7667545180221936338}
+  - {fileID: 961946016442508726}
+  - {fileID: 4072457295109374101}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3490832352532145397
@@ -162,13 +256,216 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29444265, y: 0.32806852}
   m_EdgeRadius: 0
---- !u!58 &454132713931229736
-CircleCollider2D:
+--- !u!95 &3438191634389661829
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2196825457060732795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 004a72b562bb85241a8e296216a9416b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &865626958391183348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196825457060732795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7355b65353770324d98ebec5ea74d224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthPoint: 100
+  StaminaPoint: 100
+  Damage: 33
+  speed: 4
+  jumpingPower: 6
+  attackCD: 1
+  rb: {fileID: 837188952607969564}
+  groundCheck: {fileID: 7667545180221936338}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  AttackCollider: {fileID: 8850712272893821401}
+  animator: {fileID: 3438191634389661829}
+  DoGoRight:
+    m_Name: Do Go Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e0f451cb-a45c-4529-b5fe-f37c582d847a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6783fd45-9ec5-416b-a448-f44af9c2d68b
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Go Right
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ce2e4a70-89e0-4f5a-86ba-3dfac856e877
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Go Right
+      m_Flags: 0
+    m_Flags: 0
+  DoGoLeft:
+    m_Name: Do Go Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0d0838d4-eefc-4aaf-a7a0-b2447b01f3bc
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 145b79f5-dc2e-46fe-8920-c0c3b949881c
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Go Left
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 035a4d07-d706-45a2-96dd-329d3a2cc613
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Go Left
+      m_Flags: 0
+    m_Flags: 0
+  DoJump:
+    m_Name: Do Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 04542e32-9133-42b2-a510-057ad22ace27
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3c43e1fb-0ded-40eb-b6bb-30a721db997a
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Jump
+      m_Flags: 0
+    - m_Name: 
+      m_Id: c7bb81b7-f912-407d-a8b8-ddf616ecda0e
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Jump
+      m_Flags: 0
+    m_Flags: 0
+  DoAttack:
+    m_Name: Do Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a3140d18-9645-48fc-95b3-0905108f6391
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bdd7a953-31b0-437d-9215-6cc403530e38
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Attack
+      m_Flags: 0
+    - m_Name: 
+      m_Id: c5f5ff64-b072-489b-af11-3bf566c31b37
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Attack
+      m_Flags: 0
+    m_Flags: 0
+  DoSlide:
+    m_Name: Do Slide
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d10719dc-a7ff-4b21-b119-6ad97180cc0f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c7bd40cb-1faf-4a8a-9793-95681ae367eb
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Slide
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 05be3d2d-4331-42ae-bfa5-fd2501b892c8
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Slide
+      m_Flags: 0
+    m_Flags: 0
+--- !u!1 &2638747084426397406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 961946016442508726}
+  - component: {fileID: 8850712272893821401}
+  m_Layer: 0
+  m_Name: AttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961946016442508726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638747084426397406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7502014077200124332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8850712272893821401
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638747084426397406}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -194,178 +491,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09, y: 0.02}
+  m_Offset: {x: 0.08, y: 0.025}
   serializedVersion: 2
   m_Radius: 0.16
---- !u!95 &3438191634389661829
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2196825457060732795}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 004a72b562bb85241a8e296216a9416b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5807830967076069199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2196825457060732795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2212b1d20e603647bd05296728353a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3438191634389661829}
-  DoGoRight:
-    m_Name: Do Go Right
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: f2e66975-c3bd-48d4-a1e2-ef54733e7dbb
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 5e11bc88-b1c7-48d5-b043-c2bcaad535ee
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Go Right
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 3dac8b8c-19e3-4408-a417-4e4a81cac729
-      m_Path: <Gamepad>/leftStick/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Go Right
-      m_Flags: 0
-    m_Flags: 0
-  DoGoLeft:
-    m_Name: Do Go Left
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 3ebacd29-2f73-47a2-b5da-5f3f7bb0d799
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 3d3b5ab9-614b-4e5e-9e07-45a89b822492
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Go Left
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 5073a8c9-28fe-4110-a151-657dc934aa3f
-      m_Path: <Gamepad>/leftStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Go Left
-      m_Flags: 0
-    m_Flags: 0
-  DoJump:
-    m_Name: Do Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1701b009-c577-409d-86d5-392494b6067e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: c210becb-8342-4933-a15a-4c7f5dac82f6
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Jump
-      m_Flags: 0
-    - m_Name: 
-      m_Id: db9592e4-aa5d-40eb-adbc-1dc9bb726a81
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Jump
-      m_Flags: 0
-    m_Flags: 0
-  DoAttack:
-    m_Name: Do Attack
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 2680d70b-e4a1-46d8-bb7b-5a52563e0ffd
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e29c3c78-4440-4879-a92b-095510ac6266
-      m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Attack
-      m_Flags: 0
-    - m_Name: 
-      m_Id: b56c843e-3dfe-43de-8aa0-b25a29ad508d
-      m_Path: <Gamepad>/buttonWest
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Attack
-      m_Flags: 0
-    m_Flags: 0
-  DoSlide:
-    m_Name: Do Slide
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 01eab28f-03af-4ff6-b2d9-09e14a7471aa
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d8e26ecd-6b30-4132-a50a-c1b6547d83c9
-      m_Path: <Keyboard>/leftShift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Slide
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 01403896-0392-4d3c-9358-38b541d01ac7
-      m_Path: <Gamepad>/rightTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Do Slide
-      m_Flags: 0
-    m_Flags: 0
-  AttackCollider: {fileID: 454132713931229736}
-  Damage: 33
-  speed: 4
-  jumpingPower: 8
-  attackCD: 1
-  rb: {fileID: 837188952607969564}
-  groundCheck: {fileID: 7667545180221936338}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &6085376502534640756
 GameObject:
   m_ObjectHideFlags: 0

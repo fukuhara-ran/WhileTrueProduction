@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
 
-public class Enemy : MonoBehaviour
+public class EnemyLegacy : MonoBehaviour
 {
     public Animator animator;
 
@@ -85,9 +85,9 @@ public class Enemy : MonoBehaviour
                 isMovingLeft = true;
             }
 
-            if(player.getIsAttacking()){
-                isAttacking = true;
-            }
+            // if(player.getIsAttacking()){
+            //     isAttacking = true;
+            // }
         }
 
         if(isAttacking && Time.time >= nextAttack) {
