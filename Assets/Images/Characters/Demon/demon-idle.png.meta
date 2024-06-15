@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3e294871daa5fbc4ca6c95925c04dfae
+guid: 5724171cd06e5f648a9bfd670a7382c9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MonedaD_0
+      name: demon-idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 160
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e1c332f23fd7a0439a7bb389838a485
-      internalID: -2122867078
+      spriteID: dd0ade39ce734c243b8426d6b5367b69
+      internalID: -1749701471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MonedaD_1
+      name: demon-idle_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 160
         y: 0
-        width: 16
-        height: 16
+        width: 160
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 951841ea3ed7a53418bd53faac5f91ca
-      internalID: 297743401
+      spriteID: e87825f303d11c748af3314749f921db
+      internalID: -1949829318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MonedaD_2
+      name: demon-idle_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 320
         y: 0
-        width: 16
-        height: 16
+        width: 160
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc7b88293723d584db77ab82aeb9ba2e
-      internalID: -1940655165
+      spriteID: 3a8f32148938f4e44abb6469cba5b38d
+      internalID: -1039164745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MonedaD_3
+      name: demon-idle_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 480
         y: 0
-        width: 16
-        height: 16
+        width: 160
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58ad19ff761ed6b4d91fbd5e07b9c73c
-      internalID: 2024336167
+      spriteID: eb4c46dba177bbf4d9e3b1c8dbd82088
+      internalID: 1336510944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MonedaD_4
+      name: demon-idle_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 640
         y: 0
-        width: 16
-        height: 16
+        width: 160
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +208,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3932df0788f7ed468059e8892651d1c
-      internalID: -1291280350
+      spriteID: ba0e95af1854b1247833c4604140fb35
+      internalID: -914117751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-idle_5
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 160
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c300b4b3ff143844bf5758971b13128
+      internalID: 559511911
       vertices: []
       indices: 
       edges: []
@@ -225,11 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MonedaD_0: -2122867078
-      MonedaD_1: 297743401
-      MonedaD_2: -1940655165
-      MonedaD_3: 2024336167
-      MonedaD_4: -1291280350
+      demon-idle_0: -1749701471
+      demon-idle_1: -1949829318
+      demon-idle_2: -1039164745
+      demon-idle_3: 1336510944
+      demon-idle_4: -914117751
+      demon-idle_5: 559511911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
