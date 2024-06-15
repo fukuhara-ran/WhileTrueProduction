@@ -7,11 +7,12 @@ public class Jerangkong : Enemy {
     [SerializeField] Collider2D PlayerDetectorCollision;
     void FixedUpdate()
     {
-        isMovingRight = false;
-        isMovingLeft = false;
-        isAttacked = false;
-        horizontal = 0;
-
+        if(HealthPoint < 1) {
+            Die();
+            isAttacking = false;
+        }
+        Reset();
+        
         GetPlayer();
 
         if(adventurer != null) {
@@ -72,6 +73,11 @@ public class Jerangkong : Enemy {
     }
 
     private void Reset() {
-        
+        isMovingLeft = false;
+        isMovingRight = false;
+        // isAttacking = false;
+        isAttacked = false;
+        isJumping = false;
+        horizontal = 0;
     }
 }
