@@ -1,8 +1,7 @@
+using System;
 using System.Collections.Generic;
-using TMPro;
-using UnityEditor.ShaderKeywordFilter;
-using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Actor : MonoBehaviour {
     [SerializeField] protected int HealthPoint = 100;
@@ -17,7 +16,8 @@ public class Actor : MonoBehaviour {
     protected bool isMovingRight;
     protected bool isMovingLeft;
     protected bool isJumping;
-    public bool isAttacking;
+    protected bool isAttacking;
+    [NonSerialized] public UnityEvent onAttacking = new();
     protected bool isAttacked;
     protected float horizontal;
     protected Vector3 facingRight;
@@ -41,6 +41,8 @@ public class Actor : MonoBehaviour {
     }
 
     protected void Attack() {
+        onAttacking.Invoke();
+        Debug.Log(this.tag + "onAttacking Invoked");
         List<Collider2D> actors = new();
         int i = Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
         Debug.Log("caught ====" + i);

@@ -292,8 +292,8 @@ MonoBehaviour:
   HealthPoint: 100
   StaminaPoint: 100
   Damage: 33
-  speed: 4
-  jumpingPower: 6
+  speed: 5
+  jumpingPower: 10
   attackCD: 1
   rb: {fileID: 837188952607969564}
   groundCheck: {fileID: 7667545180221936338}
@@ -427,6 +427,9 @@ MonoBehaviour:
       m_Action: Do Slide
       m_Flags: 0
     m_Flags: 0
+  JumpCost: 20
+  AttackCost: 20
+  SlideCost: 40
 --- !u!1 &2638747084426397406
 GameObject:
   m_ObjectHideFlags: 0

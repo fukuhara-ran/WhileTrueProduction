@@ -137,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.48
+      value: 23.88
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.75
+      value: 9.63
       objectReference: {fileID: 0}
     - target: {fileID: 6420516247756326715, guid: ce63dba9c0d27744e9c7f0e460972b64, type: 3}
       propertyPath: m_LocalPosition.z
@@ -194,11 +194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.55
+      value: 24.32
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.37
+      value: 13.45
       objectReference: {fileID: 0}
     - target: {fileID: 7078547595614509220, guid: b907fd2838fc57540b12152cade55c52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -247,11 +247,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.48
+      value: 23.36
       objectReference: {fileID: 0}
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 2.62
       objectReference: {fileID: 0}
     - target: {fileID: 2084478425456845002, guid: 8f2fa77cc7aa4214ea9d11beed316657, type: 3}
       propertyPath: m_LocalPosition.z
@@ -526,11 +526,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.96
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.5
+      value: -9.08
       objectReference: {fileID: 0}
     - target: {fileID: 2718927635498497984, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -564,14 +564,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4189778150076542367, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
-      propertyPath: EnemyTag
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4189778150076542367, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
-      propertyPath: PlayerDetectorCollision
-      value: 
-      objectReference: {fileID: 427284710}
     - target: {fileID: 6117403175744664141, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
       propertyPath: m_Name
       value: Jerangkong
@@ -589,26 +581,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 837188952607969564, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 837188952607969564, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
-      propertyPath: m_GravityScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 865626958391183348, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 865626958391183348, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
-      propertyPath: EnemyTag
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 865626958391183348, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
-      propertyPath: jumpingPower
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2196825457060732795, guid: 2af36f82cc9ed084fa3049e311879799, type: 3}
       propertyPath: m_Name
       value: Adventurer
