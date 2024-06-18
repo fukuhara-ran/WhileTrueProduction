@@ -15,6 +15,7 @@ public class Actor : MonoBehaviour {
 
     protected bool isMovingRight;
     protected bool isMovingLeft;
+    protected bool isFacingRight;
     protected bool isJumping;
     protected bool isAttacking;
     [NonSerialized] public UnityEvent onAttacking = new();
@@ -38,25 +39,20 @@ public class Actor : MonoBehaviour {
 
     public void Damaged(int damage) {
         HealthPoint -= damage;
+        Attacked();
     }
 
     protected void Attack() {
         onAttacking.Invoke();
-        Debug.Log(this.tag + "onAttacking Invoked");
+        animator.SetBool("isAttacking", true);
         List<Collider2D> actors = new();
         int i = Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
-        Debug.Log("caught ====" + i);
 
         foreach(var actor in actors) {
             if(actor.GetComponent<Actor>() != null && !actor.CompareTag(tag)) {
                 actor.transform.GetComponent<Actor>().Damaged(Damage);
-                Debug.Log("Damaging " + actor.tag);
             }
         }
-    }
-
-    protected void Move(float multiplier) {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
     protected void EndAttacking() {
@@ -64,15 +60,32 @@ public class Actor : MonoBehaviour {
         isAttacking = false;
     }
 
+    protected void Attacked() {
+        if(isAttacking) return;
+        animator.SetBool("isAttacked", true);
+        isAttacked = true;
+    }
+
+    protected void EndAttacked() {
+        animator.SetBool("isAttacked", false);
+        isAttacked = false;
+    }
+
+    protected void Move(float multiplier) {
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+
     protected void FlipRight() {
         if(transform.localScale.Equals(facingLeft)) {
             transform.localScale = facingRight;
+            isFacingRight = true;
         }
     }
 
     protected void FlipLeft() {
         if(transform.localScale.Equals(facingRight)) {
             transform.localScale = facingLeft;
+            isFacingRight = false;
         }
     }
 

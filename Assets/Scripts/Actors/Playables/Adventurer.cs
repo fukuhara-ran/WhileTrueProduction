@@ -15,7 +15,7 @@ public class Adventurer : Actor {
     private bool isSliding;
     private bool canDoubleJump;
     private float nextSlide;
-    private float slideCD;
+    private float slideCD = 1f;
     private bool isStillSliding;
 
     void OnEnable() {
@@ -66,7 +66,6 @@ public class Adventurer : Actor {
         //Attack
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", true);
             Attack();
             DisableInput();
         }
@@ -90,12 +89,12 @@ public class Adventurer : Actor {
         return position.x - transform.position.x;
     }
 
-    void EndAttacking() {
+    new void EndAttacking() {
         animator.SetBool("isAttacking", false);
         EnableInput();
     }
 
-    void EndSliding() {
+    new void EndSliding() {
         animator.SetBool("isSliding", false);
         isStillSliding = false;
         EnableInput();
