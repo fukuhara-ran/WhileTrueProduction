@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Dajjal : Enemy {
     [SerializeField] private Projectile projectile;
-    void OnEnable () {
-        attackCD = 3f;
-    }
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
@@ -36,12 +33,14 @@ public class Dajjal : Enemy {
             if(math.abs(playerDistance) > 20f) {
                 adventurer = null;
             }
+        }
+
+        if(Time.time >= nextAttack) {
+            nextAttack = Time.time + attackCD;
             isAttacking = true;
         }
 
-        if(isAttacking && Time.time >= nextAttack) {
-            nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", true);
+        if(isAttacking) {
             Attack();
             isAttacking = false;
         }
@@ -57,13 +56,19 @@ public class Dajjal : Enemy {
         }
 
         Move(horizontal);
-
-        // animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
     new private void Attack() {
+        onAttacking.Invoke();
+        animator.SetBool("isAttacking", true);
+    }
+
+    new private void EndAttacking() {
+        animator.SetBool("isAttacking", false);
         projectile.GetComponent<FireBall>().goRight = isFacingRight;
-        Instantiate(projectile, transform.position, Quaternion.identity);
+        Instantiate(projectile,
+                    new Vector3(transform.position.x + (isFacingRight ? 2:-2), transform.position.y),
+                    Quaternion.Euler(new Vector3(0, 0, isFacingRight?90:-90)));
     }
 
     private void Reset() {
