@@ -13,7 +13,6 @@ public class Enemy : Actor {
     }
 
     protected void EndDying() {
-        // Debug.Log(tag+" is Dead");
         animator.SetBool("isDying", false);
 
         if(Droppable != null) {
