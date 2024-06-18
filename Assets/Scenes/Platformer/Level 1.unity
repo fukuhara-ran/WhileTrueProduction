@@ -2279,11 +2279,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 682805406}
+  m_Father: {fileID: 995725668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158.67993, y: -51}
+  m_AnchoredPosition: {x: -223.16003, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &475067973
@@ -2329,7 +2329,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 475067974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826876244}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: DecreaseSFXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &475067974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2533,7 +2545,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 511188605}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826876244}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: IncreaseMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &511188605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,7 +3594,6 @@ RectTransform:
   - {fileID: 962543124}
   - {fileID: 191244377}
   - {fileID: 995725668}
-  - {fileID: 475067972}
   m_Father: {fileID: 641669417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4502,8 +4525,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1208016209}
-  backgroundMusic: {fileID: 238127922}
+  optionMenuUI: {fileID: 641669416}
   fadeDuration: 0.5
+  backgroundMusic: {fileID: 238127922}
+  sfxAudioSource: {fileID: 197905114}
+  musicVolumeImage: {fileID: 1512993417}
+  sfxVolumeImage: {fileID: 2018188}
+  volumeSprites:
+  - {fileID: 21300000, guid: 3dd708cb031b43049a37501e923c2410, type: 3}
+  - {fileID: 21300000, guid: 555c0f010770dd247877ee210e62f6f5, type: 3}
+  - {fileID: 21300000, guid: c2414f856c231444187a6655ddc1c1a5, type: 3}
+  - {fileID: 21300000, guid: e33423d611e2d854d8fdb62aca766dc7, type: 3}
+  - {fileID: 21300000, guid: 5340c0f3afb752546a2f1ef266e12e6d, type: 3}
+  - {fileID: 21300000, guid: 8633432296c42bf408b89a597d2dca39, type: 3}
+  - {fileID: 21300000, guid: 4ca974a2d7b0b3e4480d31284c14c998, type: 3}
+  - {fileID: 21300000, guid: 1513fc5fdd68a0140be4eceb68320ce5, type: 3}
+  - {fileID: 21300000, guid: 2dca1ac6ff949c444823fdcb57567da6, type: 3}
+  - {fileID: 21300000, guid: d55e87512f71fb04d95ad78bc7513639, type: 3}
+  - {fileID: 21300000, guid: 25ab62848a07fcc4aaa9ff8822e753cd, type: 3}
+  volumeStep: 11
 --- !u!4 &826876245
 Transform:
   m_ObjectHideFlags: 0
@@ -5401,6 +5441,7 @@ RectTransform:
   m_Children:
   - {fileID: 2018187}
   - {fileID: 1266698782}
+  - {fileID: 475067972}
   m_Father: {fileID: 682805406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5992,7 +6033,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1235535319}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826876244}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OpenOptions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1235535319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6112,7 +6165,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1266698784}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826876244}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: IncreaseSFXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1266698784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8469,7 +8534,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1654593053}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826876244}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: DecreaseMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1654593053
 MonoBehaviour:
   m_ObjectHideFlags: 0
