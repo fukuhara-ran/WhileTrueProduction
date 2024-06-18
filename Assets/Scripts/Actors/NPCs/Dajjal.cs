@@ -58,7 +58,7 @@ public class Dajjal : Enemy {
 
         Move(horizontal);
 
-        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+        // animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
     new private void Attack() {

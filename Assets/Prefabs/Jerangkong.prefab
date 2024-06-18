@@ -309,7 +309,7 @@ MonoBehaviour:
   Damage: 33
   speed: 4
   jumpingPower: 6
-  attackCD: 1
+  attackCD: 2
   rb: {fileID: 5805657957977748866}
   groundCheck: {fileID: 5017065599353816458}
   groundLayer:

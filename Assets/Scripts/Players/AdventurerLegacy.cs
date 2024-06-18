@@ -136,7 +136,7 @@ public class AdventurerLegacy : MonoBehaviour
 
     public void Damaged(int damage) {
         HealthPoint -= damage;
-        Debug.Log("HP====" + HealthPoint);
+        // Debug.Log("HP====" + HealthPoint);
     }
 
     private void Move(float multiplier) {

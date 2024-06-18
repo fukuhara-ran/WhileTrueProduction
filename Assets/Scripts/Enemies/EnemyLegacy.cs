@@ -49,7 +49,7 @@ public class EnemyLegacy : MonoBehaviour
     public void Damaged(int damage) {
         HealthPoint -= damage;
         isAttacked = true;
-        Debug.Log("HP====" + HealthPoint);
+        // Debug.Log("HP====" + HealthPoint);
     }
 
     void Dead() {

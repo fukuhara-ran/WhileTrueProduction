@@ -31,9 +31,7 @@ public class Jerangkong : Enemy {
 
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", true);
             Attack();
-            isAttacking = false;
         }
 
         if (isMovingRight) {
@@ -47,7 +45,7 @@ public class Jerangkong : Enemy {
         }
 
         Move(horizontal);
-
+        
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
@@ -64,7 +62,7 @@ public class Jerangkong : Enemy {
     }
 
     private void CounterAttack() {
-        if(UnityEngine.Random.Range(1,10) < 11) {
+        if(UnityEngine.Random.Range(1,10) < 5) {
             isAttacking = true;
         }
     }

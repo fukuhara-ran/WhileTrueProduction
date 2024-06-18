@@ -66,7 +66,6 @@ public class Adventurer : Actor {
         //Attack
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
-            animator.SetBool("isAttacking", true);
             Attack();
             DisableInput();
         }
