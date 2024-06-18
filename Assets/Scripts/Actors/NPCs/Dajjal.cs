@@ -1,37 +1,48 @@
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Jerangkong : Enemy {
+public class Dajjal : Enemy {
+    [SerializeField] private Projectile projectile;
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
             Die();
             isAttacking = false;
         }
+
         Reset();
         
         GetPlayer();
 
         if(adventurer != null) {
             float playerDistance = adventurer.HorizontalDistanceFrom(transform.position);
-            if(playerDistance < -3f) {
+            if(playerDistance < -18f) {
                 isMovingRight = true;
                 isMovingLeft = false;
-            } else if(playerDistance > 3f){
+            } else if(playerDistance > 18f){
                 isMovingRight = false;
                 isMovingLeft = true;
             }
 
-            if(math.abs(playerDistance) > 10f) {
-                adventurer.onAttacking.RemoveListener(this.CounterAttack);
+            if(playerDistance < 0) {
+                FlipRight();
+            } else if(playerDistance > 0) {
+                FlipLeft();
+            }
+
+            if(math.abs(playerDistance) > 20f) {
                 adventurer = null;
             }
         }
 
-        if(isAttacking && Time.time >= nextAttack) {
+        if(Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
+            isAttacking = true;
+        }
+
+        if(isAttacking) {
             Attack();
+            isAttacking = false;
         }
 
         if (isMovingRight) {
@@ -45,26 +56,19 @@ public class Jerangkong : Enemy {
         }
 
         Move(horizontal);
-        
-        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
-    new private void GetPlayer() {
-        if(adventurer != null) return;
-        List<Collider2D> players = new();
-        Physics2D.OverlapCollider(PlayerDetectorCollision, contactFilter2D, players);
-        foreach(var p in players) {
-            if(p.GetComponent<Adventurer>() != null) {
-                adventurer = p.transform.GetComponent<Adventurer>();
-                adventurer.onAttacking.AddListener(this.CounterAttack);
-            }
-        }
+    new private void Attack() {
+        onAttacking.Invoke();
+        animator.SetBool("isAttacking", true);
     }
 
-    private void CounterAttack() {
-        if(UnityEngine.Random.Range(1,10) < 5) {
-            isAttacking = true;
-        }
+    new private void EndAttacking() {
+        animator.SetBool("isAttacking", false);
+        projectile.GetComponent<FireBall>().goRight = isFacingRight;
+        Instantiate(projectile,
+                    new Vector3(transform.position.x + (isFacingRight ? 2:-2), transform.position.y),
+                    Quaternion.Euler(new Vector3(0, 0, isFacingRight?90:-90)));
     }
 
     private void Reset() {
