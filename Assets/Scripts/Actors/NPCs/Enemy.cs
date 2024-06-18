@@ -7,6 +7,7 @@ public class Enemy : Actor {
 
     [SerializeField] protected Adventurer adventurer;
     [SerializeField] protected Collider2D PlayerDetectorCollision;
+    [SerializeField] protected int DropAmount = 1;
 
     protected void Die() {
         animator.SetBool("isDying", true);
@@ -16,7 +17,7 @@ public class Enemy : Actor {
         animator.SetBool("isDying", false);
 
         if(Droppable != null) {
-            for(var i = 0; i < 200; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
+            for(var i = 0; i < DropAmount; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
         }
 
         gameObject.SetActive(false);

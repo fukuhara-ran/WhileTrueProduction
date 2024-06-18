@@ -320,6 +320,7 @@ MonoBehaviour:
   Droppable: {fileID: 3161789796307390701, guid: ba338f6f126798d4a9420c18fcbddd09, type: 3}
   adventurer: {fileID: 0}
   PlayerDetectorCollision: {fileID: 2806673797504911157}
+  DropAmount: 300
 --- !u!1 &8413553062090562867
 GameObject:
   m_ObjectHideFlags: 0
