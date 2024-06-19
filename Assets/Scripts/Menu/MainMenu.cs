@@ -10,12 +10,18 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsMenuUI;
     public AudioSource backgroundMusic;
     public AudioSource sfxAudioSource;
-    public Slider musicSlider;
-    public Slider sfxSlider;
-    public float volumeStep = 0.1f;
+    public Image musicVolumeImage;
+    public Image sfxVolumeImage;
+    public Sprite[] volumeSprites;
+    public float volumeStep = 11f;
 
     void Start()
     {
+        LoadVolumeSettings();
+
+        UpdateVolumeImage(backgroundMusic.volume * 100f, musicVolumeImage);
+        UpdateVolumeImage(sfxAudioSource.volume * 100f, sfxVolumeImage);
+
         mainMenuUI.SetActive(true);
         optionsMenuUI.SetActive(false);
     }
@@ -54,35 +60,75 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetMusicVolume(float volume)
-    {
-        backgroundMusic.volume = volume;
-        musicSlider.value = volume;
-    }
-
-    public void SetSFXVolume(float volume)
-    {
-        sfxAudioSource.volume = volume;
-        sfxSlider.value = volume;
-    }
-
     public void IncreaseMusicVolume()
     {
-        SetMusicVolume(Mathf.Clamp(backgroundMusic.volume + volumeStep, 0f, 1f));
+        float newVolume = Mathf.Clamp(backgroundMusic.volume * 100f + volumeStep, 0f, 100f);
+        SetMusicVolume(newVolume);
     }
 
     public void DecreaseMusicVolume()
     {
-        SetMusicVolume(Mathf.Clamp(backgroundMusic.volume - volumeStep, 0f, 1f));
+        float newVolume = Mathf.Clamp(backgroundMusic.volume * 100f - volumeStep, 0f, 100f);
+        SetMusicVolume(newVolume);
     }
 
     public void IncreaseSFXVolume()
     {
-        SetSFXVolume(Mathf.Clamp(sfxAudioSource.volume + volumeStep, 0f, 1f));
+        float newVolume = Mathf.Clamp(sfxAudioSource.volume * 100f + volumeStep, 0f, 100f);
+        SetSFXVolume(newVolume);
     }
 
     public void DecreaseSFXVolume()
     {
-        SetSFXVolume(Mathf.Clamp(sfxAudioSource.volume - volumeStep, 0f, 1f));
+        float newVolume = Mathf.Clamp(sfxAudioSource.volume * 100f - volumeStep, 0f, 100f);
+        SetSFXVolume(newVolume);
+    }
+
+    void SetMusicVolume(float volume)
+    {
+        backgroundMusic.volume = volume / 100f;
+        UpdateVolumeImage(volume, musicVolumeImage);
+        SaveVolumeSettings();
+    }
+
+    void SetSFXVolume(float volume)
+    {
+        sfxAudioSource.volume = volume / 100f;
+        UpdateVolumeImage(volume, sfxVolumeImage);
+        SaveVolumeSettings();
+    }
+
+    void UpdateVolumeImage(float volume, Image volumeImage)
+    {
+        int index = Mathf.Clamp(Mathf.RoundToInt(volume / 11f), 0, 10);
+        volumeImage.sprite = volumeSprites[index];
+    }
+
+    void SaveVolumeSettings()
+    {
+        PlayerPrefs.SetFloat("MusicVolume", backgroundMusic.volume);
+        PlayerPrefs.SetFloat("SFXVolume", sfxAudioSource.volume);
+        PlayerPrefs.Save();
+    }
+
+    void LoadVolumeSettings()
+    {
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            backgroundMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        else
+        {
+            backgroundMusic.volume = 1f; // Default volume
+        }
+
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            sfxAudioSource.volume = PlayerPrefs.GetFloat("SFXVolume");
+        }
+        else
+        {
+            sfxAudioSource.volume = 1f; // Default volume
+        }
     }
 }
