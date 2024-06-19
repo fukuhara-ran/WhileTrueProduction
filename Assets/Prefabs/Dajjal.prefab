@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5871389966501274816}
   - component: {fileID: 8533407253380386218}
   - component: {fileID: 2906246401404473512}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dajjal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05143284, y: -0.033174396}
+  m_Offset: {x: 0.05143284, y: -0.09454171}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -160,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.19781594, y: 0.23458576}
+  m_Size: {x: 0.19781594, y: 0.3573204}
   m_EdgeRadius: 0
 --- !u!95 &8533407253380386218
 Animator:
@@ -211,7 +211,7 @@ MonoBehaviour:
   Droppable: {fileID: 3161789796307390701, guid: ba338f6f126798d4a9420c18fcbddd09, type: 3}
   adventurer: {fileID: 0}
   PlayerDetectorCollision: {fileID: 8938368464840339588}
-  DropAmount: 300
+  DropAmount: 0
   projectile: {fileID: 1618126956900165444, guid: 9497a631b9aad464c8b9e0c147ca7b73, type: 3}
 --- !u!1 &6228398429894292909
 GameObject:
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7684543219095285180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7469117993211888305}
   - component: {fileID: 8938368464840339588}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DetectPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

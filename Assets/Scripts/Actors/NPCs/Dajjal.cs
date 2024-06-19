@@ -6,6 +6,7 @@ public class Dajjal : Enemy {
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
+            rb.gravityScale = 0.5f;
             Die();
             isAttacking = false;
         }
@@ -29,15 +30,13 @@ public class Dajjal : Enemy {
             } else if(playerDistance > 0) {
                 FlipLeft();
             }
-
-            if(math.abs(playerDistance) > 20f) {
-                adventurer = null;
+            
+            if(Time.time >= nextAttack && !animator.GetBool("isDying")) {
+                nextAttack = Time.time + attackCD;
+                isAttacking = true;
             }
-        }
-
-        if(Time.time >= nextAttack) {
-            nextAttack = Time.time + attackCD;
-            isAttacking = true;
+            
+            DetachPlayer(null);
         }
 
         if(isAttacking) {
