@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 390666517449612531}
   - component: {fileID: 6911897159355165943}
   - component: {fileID: 7555714820260680065}
+  - component: {fileID: 5264897938576753779}
   m_Layer: 0
   m_Name: Obelisk
   m_TagString: Untagged
@@ -115,7 +116,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.040038943, y: -0.029390216}
@@ -142,3 +143,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5264897938576753779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269240400406391519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3e25d4cfd2d3642a16f26df16f6a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDetect: {fileID: 6911897159355165943}

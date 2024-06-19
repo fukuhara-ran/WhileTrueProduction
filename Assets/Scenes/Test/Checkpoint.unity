@@ -397,6 +397,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obelisk
       objectReference: {fileID: 0}
+    - target: {fileID: 6269240400406391519, guid: 897c8845a70866a418b5328dd3b3fb99, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911897159355165943, guid: 897c8845a70866a418b5328dd3b3fb99, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
