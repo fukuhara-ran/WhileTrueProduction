@@ -46,8 +46,7 @@ public class Actor : MonoBehaviour {
         onAttacking.Invoke();
         animator.SetBool("isAttacking", true);
         List<Collider2D> actors = new();
-        int i = Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
-        Debug.Log(i+" obj found");
+        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
 
         foreach(var actor in actors) {
             if(actor.GetComponent<Actor>() != null && !actor.CompareTag(tag)) {
@@ -56,7 +55,6 @@ public class Actor : MonoBehaviour {
             }
 
             if(actor.GetComponent<FireBall>() != null) {
-                Debug.Log(tag+" found fireball");
                 actor.transform.GetComponent<FireBall>().Reverse();
             }
         }
@@ -74,7 +72,6 @@ public class Actor : MonoBehaviour {
     }
 
     protected void EndAttacked() {
-        Debug.Log(tag+" EndAttacked");
         animator.SetBool("isAttacked", false);
         isAttacked = false;
     }
