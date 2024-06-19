@@ -1,26 +1,23 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Dajjal : Enemy {
-    [SerializeField] private Projectile projectile;
+public class Mushroom : Enemy {
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
-            rb.gravityScale = 0.5f;
             Die();
             isAttacking = false;
         }
-
         Reset();
         
         GetPlayer();
 
         if(adventurer != null) {
             float playerDistance = adventurer.HorizontalDistanceFrom(transform.position);
-            if(playerDistance < -18f) {
+            if(playerDistance < -2f) {
                 isMovingRight = true;
                 isMovingLeft = false;
-            } else if(playerDistance > 18f){
+            } else if(playerDistance > 2f){
                 isMovingRight = false;
                 isMovingLeft = true;
             }
@@ -30,8 +27,8 @@ public class Dajjal : Enemy {
             } else if(playerDistance > 0) {
                 FlipLeft();
             }
-            
-            if(Time.time >= nextAttack && !animator.GetBool("isDying")) {
+
+            if(Time.time >= nextAttack && !animator.GetBool("isDying") && math.abs(playerDistance) < 3f) {
                 nextAttack = Time.time + attackCD;
                 isAttacking = true;
             }
@@ -45,29 +42,20 @@ public class Dajjal : Enemy {
         }
 
         if (isMovingRight) {
-            horizontal = 1f;
+            horizontal = 2f;
             FlipRight();
         } else if (isMovingLeft) {
-            horizontal = -1f;
+            horizontal = -2f;
             FlipLeft();
         } else {
             horizontal = 0f;
         }
 
+        if(animator.GetBool("isAttacking")) horizontal = 0;
+
         Move(horizontal);
-    }
-
-    new private void Attack() {
-        onAttacking.Invoke();
-        animator.SetBool("isAttacking", true);
-    }
-
-    new private void EndAttacking() {
-        animator.SetBool("isAttacking", false);
-        projectile.GetComponent<FireBall>().goRight = isFacingRight;
-        Instantiate(projectile,
-                    new Vector3(transform.position.x + (isFacingRight ? 2:-2), transform.position.y),
-                    Quaternion.Euler(new Vector3(0, 0, isFacingRight?90:-90)));
+        
+        animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
     private void Reset() {

@@ -18,6 +18,8 @@ public class Adventurer : Actor {
     private float slideCD = 1f;
     private bool isStillSliding;
 
+    public int Wealth = 0;
+
     void OnEnable() {
         MapInput();
         EnableInput();
@@ -83,6 +85,10 @@ public class Adventurer : Actor {
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
         animator.SetBool("isJumping", rb.velocity.y > 0);
         animator.SetBool("isFalling", rb.velocity.y < 0);
+    }
+
+    public void addWealth() {
+        Wealth++;
     }
 
     public float HorizontalDistanceFrom(Vector3 position) {

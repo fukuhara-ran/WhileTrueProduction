@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Enemy : Actor {
@@ -15,6 +17,8 @@ public class Enemy : Actor {
 
     protected void EndDying() {
         animator.SetBool("isDying", false);
+
+        if(DropAmount < 1) DropAmount = UnityEngine.Random.Range(4,10);
 
         if(Droppable != null) {
             for(var i = 0; i < DropAmount; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
@@ -33,5 +37,17 @@ public class Enemy : Actor {
                 adventurer = p.transform.GetComponent<Adventurer>();
             }
         }
+    }
+
+    protected bool DetachPlayer(Action ActionBeforeDetaching) {
+        if(adventurer == null) return true;
+
+        if(math.abs(adventurer.HorizontalDistanceFrom(transform.position)) > (PlayerDetectorCollision as BoxCollider2D).size.x / 2) {
+            ActionBeforeDetaching?.Invoke();
+            adventurer = null;
+            return true;
+        }
+
+        return false;
     }
 }

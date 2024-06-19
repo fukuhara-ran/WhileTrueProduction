@@ -22,11 +22,10 @@ public class Jerangkong : Enemy {
                 isMovingRight = false;
                 isMovingLeft = true;
             }
-
-            if(math.abs(playerDistance) > 10f) {
+            
+            DetachPlayer(() => {
                 adventurer.onAttacking.RemoveListener(this.CounterAttack);
-                adventurer = null;
-            }
+            });
         }
 
         if(isAttacking && Time.time >= nextAttack) {
@@ -60,6 +59,18 @@ public class Jerangkong : Enemy {
             }
         }
     }
+
+    // new private bool DetachPlayer() {
+    //     if(adventurer == null) return true;
+
+    //     if(math.abs(adventurer.HorizontalDistanceFrom(transform.position)) > (PlayerDetectorCollision as BoxCollider2D).size.x / 2) {
+    //         adventurer.onAttacking.RemoveListener(this.CounterAttack);
+    //         adventurer = null;
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 
     private void CounterAttack() {
         if(UnityEngine.Random.Range(1,10) < 5) {
