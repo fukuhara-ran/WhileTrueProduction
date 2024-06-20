@@ -7,6 +7,7 @@ public class Mushroom : Enemy {
         if(HealthPoint < 1) {
             Die();
             isAttacking = false;
+            animator.SetBool("isAttacked", false);
         }
         Reset();
         
@@ -42,10 +43,10 @@ public class Mushroom : Enemy {
         }
 
         if (isMovingRight) {
-            horizontal = 2f;
+            horizontal = 1.5f;
             FlipRight();
         } else if (isMovingLeft) {
-            horizontal = -2f;
+            horizontal = -1.5f;
             FlipLeft();
         } else {
             horizontal = 0f;
