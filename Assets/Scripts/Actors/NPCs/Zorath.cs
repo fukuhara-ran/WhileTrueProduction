@@ -1,7 +1,14 @@
+using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Mushroom : Enemy {
+public class Zorath : Enemy {
+    
+    [SerializeField] private List<Enemy> Spawnables;
+
+    private Enemy currentBocil;
+
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
@@ -15,10 +22,10 @@ public class Mushroom : Enemy {
 
         if(adventurer != null) {
             float playerDistance = adventurer.HorizontalDistanceFrom(transform.position);
-            if(playerDistance < -2f) {
+            if(playerDistance < 10f && playerDistance > 2) {
                 isMovingRight = true;
                 isMovingLeft = false;
-            } else if(playerDistance > 2f){
+            } else if(playerDistance > -10f && playerDistance < -2){
                 isMovingRight = false;
                 isMovingLeft = true;
             }
@@ -29,12 +36,18 @@ public class Mushroom : Enemy {
                 FlipLeft();
             }
 
-            if(Time.time >= nextAttack && !animator.GetBool("isDying") && math.abs(playerDistance) < 3f) {
+            if(Time.time >= nextAttack && !animator.GetBool("isDying") && math.abs(playerDistance) < 2f) {
                 nextAttack = Time.time + attackCD;
                 isAttacking = true;
             }
+
+            // Debug.Log(tag+" "+playerDistance+ " so that attack ==== "+isAttacking);
             
             DetachPlayer(null);
+        }
+
+        if(currentBocil == null || currentBocil.IsDestroyed() == true) {
+            Spawn();
         }
 
         if(isAttacking) {
@@ -43,10 +56,10 @@ public class Mushroom : Enemy {
         }
 
         if (isMovingRight) {
-            horizontal = 1.5f;
+            horizontal = 0.1f;
             FlipRight();
         } else if (isMovingLeft) {
-            horizontal = -1.5f;
+            horizontal = -0.1f;
             FlipLeft();
         } else {
             horizontal = 0f;
@@ -59,10 +72,23 @@ public class Mushroom : Enemy {
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
 
+    private void Spawn() {
+        animator.SetBool("isSpawning", true);
+        
+    }
+
+    private void EndSpawning() {
+        animator.SetBool("isSpawning", false);
+        var rand = UnityEngine.Random.Range(0, Spawnables.Count-1);
+        var spawnNow = Spawnables[rand];
+        (spawnNow.GetComponent<Enemy>().PlayerDetectorCollision as BoxCollider2D).size = new Vector2(30f, 2f);
+        currentBocil = Instantiate(spawnNow, new Vector3(transform.position.x + (isFacingRight ? 4f:-4f), transform.position.y), Quaternion.identity);
+    }
+
     private void Reset() {
         isMovingLeft = false;
         isMovingRight = false;
-        // isAttacking = false;
+        isAttacking = false;
         isAttacked = false;
         isJumping = false;
         horizontal = 0;

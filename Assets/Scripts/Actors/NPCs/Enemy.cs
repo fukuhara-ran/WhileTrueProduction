@@ -8,7 +8,7 @@ public class Enemy : Actor {
     [SerializeField] protected Collectible Droppable;
 
     [SerializeField] protected Adventurer adventurer;
-    [SerializeField] protected Collider2D PlayerDetectorCollision;
+    [SerializeField] public Collider2D PlayerDetectorCollision;
     [SerializeField] protected int DropAmount = 1;
 
     protected void Die() {

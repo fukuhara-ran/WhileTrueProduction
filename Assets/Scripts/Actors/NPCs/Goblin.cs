@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Mushroom : Enemy {
+public class Goblin : Enemy {
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
@@ -43,16 +43,20 @@ public class Mushroom : Enemy {
         }
 
         if (isMovingRight) {
-            horizontal = 1.5f;
+            horizontal = 2f;
             FlipRight();
         } else if (isMovingLeft) {
-            horizontal = -1.5f;
+            horizontal = -2f;
             FlipLeft();
         } else {
             horizontal = 0f;
         }
 
-        if(animator.GetBool("isAttacking")) horizontal = 0;
+        if(animator.GetBool("isAttacking")) {
+            isMovingLeft = false;
+            isMovingRight = false;
+            horizontal = 0f;
+        }
 
         Move(horizontal);
         
