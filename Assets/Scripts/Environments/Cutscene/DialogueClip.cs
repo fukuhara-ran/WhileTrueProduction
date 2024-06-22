@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-[Serializable]
+[System.Serializable]
 public class DialogueClip : PlayableAsset
 {
-    public string dialogueLine;
+    public string dialogueText;
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
         var playable = ScriptPlayable<DialogueBehaviour>.Create(graph);
 
-        DialogueBehaviour dialogueBehaviour = playable.GetBehaviour();
-        dialogueBehaviour.dialogueLine = dialogueLine;
+        DialogueBehaviour behaviour = playable.GetBehaviour();
+        behaviour.dialogueText = dialogueText;
 
         return playable;
     }
