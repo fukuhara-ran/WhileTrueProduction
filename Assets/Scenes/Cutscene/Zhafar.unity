@@ -1074,6 +1074,7 @@ PlayableDirector:
     m_References:
     - 332a8b671f3bcd94888e57df59f30c24: {fileID: 0}
     - 8157e173936b3bf4bb4192d9e8f3d0c1: {fileID: 0}
+    - 024e51b909a5162448ec96e364ff0620: {fileID: 1979958925}
     - bdf8bf362f08f704bb239ceae149e8a2: {fileID: 1979958925}
 --- !u!4 &668751369
 Transform:
@@ -1174,6 +1175,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &870677901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 870677903}
+  - component: {fileID: 870677902}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &870677902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870677901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a0a28a0ef6f15479959ff7041891c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingEffect: {fileID: 1979958925}
+  typingSpeed: 0.05
+--- !u!4 &870677903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870677901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 669.0243, y: 248.61313, z: 1.8371491}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882170443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,7 +2234,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914315449}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2380,8 +2427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "By making these adjustments to use TextMeshProUGUI, you should be able
-    to create a typing effect for your dialogue text within Unity\u2019s T"
+  m_text: Lorem ipsum dolor sit amet, c
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bee433361bccdf41869c8adc7fc2958, type: 2}
   m_sharedMaterial: {fileID: 4141289613507404382, guid: 3bee433361bccdf41869c8adc7fc2958, type: 2}
@@ -2509,6 +2555,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1961767522}
+  nameText: {fileID: 1244127812}
+  currentText: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  currentName: Ash
+  isTyping: 1
 --- !u!4 &1979958926
 Transform:
   m_ObjectHideFlags: 0
@@ -2576,7 +2628,7 @@ GameObject:
   - component: {fileID: 2115350241}
   - component: {fileID: 2115350245}
   m_Layer: 5
-  m_Name: Dialogue Manager
+  m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2889,3 +2941,4 @@ SceneRoots:
   - {fileID: 668751369}
   - {fileID: 205412990}
   - {fileID: 1979958926}
+  - {fileID: 870677903}
