@@ -5,16 +5,14 @@ using UnityEngine.Playables;
 
 public class DialogueBehaviour : PlayableBehaviour
 {
-    public string dialogueLine;
+    public string dialogueText;
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
-        GameObject directorGameObject = (playable.GetGraph().GetResolver() as PlayableDirector).gameObject;
-        DialogueSystem dialogueSystem = directorGameObject.GetComponent<DialogueSystem>();
-
-        if (dialogueSystem != null)
+        DialogueManager dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
+        if (dialogueManager != null)
         {
-            dialogueSystem.ShowDialogue(dialogueLine);
+            dialogueManager.StartDialogue(new List<string> { dialogueText });
         }
     }
 }
