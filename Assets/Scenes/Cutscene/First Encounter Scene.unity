@@ -496,10 +496,6 @@ PlayableDirector:
     value: {fileID: 766647487}
   - key: {fileID: -4225859175806146134, guid: 56205bab941162c40920ade3b7dc49cb, type: 2}
     value: {fileID: 766647487}
-  - key: {fileID: 8069838461397660035, guid: 56205bab941162c40920ade3b7dc49cb, type: 2}
-    value: {fileID: 2021196262}
-  - key: {fileID: -6613326563237431594, guid: 56205bab941162c40920ade3b7dc49cb, type: 2}
-    value: {fileID: 2021196262}
   m_ExposedReferences:
     m_References:
     - 55c14c4ff9e7c854dbcee58882ac8188: {fileID: 1363702627}
@@ -689,7 +685,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1707551580, guid: 298f0f38d0c0f604b929be90c914c952, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -1189,7 +1185,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1643823523, guid: 42842d589be9d904d976d02b32d5241e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -2171,7 +2167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2445,7 +2441,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d37f4dc567c8f6d498f7acb5dfff075a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
