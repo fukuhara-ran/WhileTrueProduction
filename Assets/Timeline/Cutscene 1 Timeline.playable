@@ -227,7 +227,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 1
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Attack2
+    m_DisplayName: Attack2CS
   - m_Version: 1
     m_Start: 41
     m_ClipIn: 0
@@ -2575,7 +2575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 7400000, guid: 5d48cf7dab04e9d449a7af73e06d2f86, type: 2}
+  m_Clip: {fileID: 7400000, guid: 9c625eba8fbb2ed4eb38f8402d94479c, type: 2}
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
