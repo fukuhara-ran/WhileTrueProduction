@@ -74,7 +74,6 @@ public class TypingEffectPlayableBehaviour : PlayableBehaviour
         {
             dialogManager.typingEffect = typingEffect;
             dialogManager.typingSpeed = typingSpeed;
-            dialogManager.isInitial = true;
         }
     }
 }

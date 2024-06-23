@@ -1024,6 +1024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668751369}
   - component: {fileID: 668751368}
+  - component: {fileID: 668751370}
   m_Layer: 0
   m_Name: Cinematic Timeline
   m_TagString: Untagged
@@ -1091,6 +1092,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &668751370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668751367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: e01c2cd744d47ce4faeb47efa38ebd71, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 870677902}
+          m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
+          m_MethodName: StartNewDialogueSequence
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &671786692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typingEffect: {fileID: 1979958925}
   typingSpeed: 0.05
+  delayBetweenDialogs: 1
   isInitial: 0
 --- !u!4 &870677903
 Transform:
