@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -37,10 +38,9 @@ public class Adventurer : Actor {
     void FixedUpdate() {
 
         if(HealthPoint < 1) {
-            horizontal = 0f;
             Reset();
             Die();
-            return;
+            DisableInput();
         }
 
         //Movement
@@ -117,7 +117,23 @@ public class Adventurer : Actor {
     }
 
     new void EndAttacking() {
+        List<Collider2D> actors = new();
+        Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
+
+        foreach(var actor in actors) {
+            if(actor.GetComponent<Actor>() != null && !actor.CompareTag(tag)) {
+                actor.transform.GetComponent<Actor>().Damaged(Damage);
+                continue;
+            }
+
+            if(actor.GetComponent<FireBall>() != null) {
+                actor.transform.GetComponent<FireBall>().Reverse();
+            }
+        }
+        
         animator.SetBool("isAttacking", false);
+        PlayAudio(AttackSFX);
+        isAttacking = false;
         EnableInput();
     }
 

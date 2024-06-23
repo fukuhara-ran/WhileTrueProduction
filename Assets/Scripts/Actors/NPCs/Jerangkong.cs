@@ -61,20 +61,8 @@ public class Jerangkong : Enemy {
         }
     }
 
-    // new private bool DetachPlayer() {
-    //     if(adventurer == null) return true;
-
-    //     if(math.abs(adventurer.HorizontalDistanceFrom(transform.position)) > (PlayerDetectorCollision as BoxCollider2D).size.x / 2) {
-    //         adventurer.onAttacking.RemoveListener(this.CounterAttack);
-    //         adventurer = null;
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
     private void CounterAttack() {
-        if(UnityEngine.Random.Range(1,10) < 5) {
+        if(UnityEngine.Random.Range(1,10) < 8) {
             isAttacking = true;
         }
     }

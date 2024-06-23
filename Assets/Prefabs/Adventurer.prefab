@@ -124,7 +124,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.32, y: 3.599, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7667545180221936338}
@@ -400,6 +400,14 @@ MonoBehaviour:
     - m_Name: 
       m_Id: c5f5ff64-b072-489b-af11-3bf566c31b37
       m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Attack
+      m_Flags: 0
+    - m_Name: 
+      m_Id: bcc441f7-c5ed-4d2b-9a64-a95683ba0e23
+      m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 

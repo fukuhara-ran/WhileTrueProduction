@@ -55,6 +55,8 @@ public class Dajjal : Enemy {
         }
 
         Move(horizontal);
+
+        PlayWalkAudio(true);
     }
 
     new private void Attack() {
@@ -68,5 +70,7 @@ public class Dajjal : Enemy {
         Instantiate(projectile,
                     new Vector3(transform.position.x + (isFacingRight ? 2:-2), transform.position.y),
                     Quaternion.Euler(new Vector3(0, 0, isFacingRight?90:-90)));
+
+        PlayAudio(AttackSFX);
     }
 }

@@ -48,11 +48,9 @@ public class Actor : MonoBehaviour {
     [SerializeField] protected int DropAmount = 1;
 
 
-    protected void PlayWalkAudio() {
-        // Debug.Log((isMovingRight || isMovingLeft)+" "+IsGrounded());
-        if((isMovingRight || isMovingLeft) && IsGrounded()) {
+    protected void PlayWalkAudio(bool playForever=false) {
+        if(((isMovingRight || isMovingLeft) && IsGrounded()) || playForever) {
             WalkAudioSource.enabled = true;
-            // Debug.Log("Walking Audio plays");
         } else {
             WalkAudioSource.enabled = false;
         }
@@ -94,6 +92,9 @@ public class Actor : MonoBehaviour {
     protected void Attack() {
         onAttacking.Invoke();
         animator.SetBool("isAttacking", true);
+    }
+
+    protected void EndAttacking() {
         List<Collider2D> actors = new();
         Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
 
@@ -102,14 +103,8 @@ public class Actor : MonoBehaviour {
                 actor.transform.GetComponent<Actor>().Damaged(Damage);
                 continue;
             }
-
-            if(actor.GetComponent<FireBall>() != null) {
-                actor.transform.GetComponent<FireBall>().Reverse();
-            }
         }
-    }
 
-    protected void EndAttacking() {
         animator.SetBool("isAttacking", false);
         PlayAudio(AttackSFX);
         isAttacking = false;
