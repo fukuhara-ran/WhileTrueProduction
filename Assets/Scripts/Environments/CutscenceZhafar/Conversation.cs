@@ -24,4 +24,8 @@ public class Conversation
     {
         return dialogs.Count == 0;
     }
+    public void Clear()
+    {
+        dialogs.Clear();
+    }
 }
