@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneTransitionManager.Instance.LoadScene("Load");
+        SceneTransitionManager.Instance.LoadScene("Prologue");
     }
 
     public void OpenOptions()
