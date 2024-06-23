@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Adventurer : Actor {
     public InputAction DoGoRight;
@@ -23,6 +24,9 @@ public class Adventurer : Actor {
     void OnEnable() {
         MapInput();
         EnableInput();
+        if(SaveManager.GetInstance().GetCurrentPlayer() != null && SceneManager.GetActiveScene().name == SaveManager.GetInstance().GetCurrentPlayer().Level) {
+            transform.position = SaveManager.GetInstance().GetCurrentPlayer().Position;
+        }
     }
 
     void OnDisable() {

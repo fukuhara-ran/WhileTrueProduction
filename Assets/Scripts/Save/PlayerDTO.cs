@@ -1,4 +1,5 @@
-using System.Numerics;
+using System;
+using UnityEngine;
 
 public class PlayerDTO {
     public int Id { get; set; }
@@ -7,11 +8,13 @@ public class PlayerDTO {
 
     public string Password { get; set; }
 
-    public int Level { get; set; }
+    public string Level { get; set; }
 
     public float PositionX { get; set; }
 
     public float PositionY { get; set; }
+
+    public int Gold { get; set; }
 
     public Vector3 Position {
         get {
