@@ -26,13 +26,15 @@ public class SaveManager {
     }
 
     private void InitializeDatabase() {
-        // Debug.Log("Initializing database");
+        Debug.Log("Initializing database");
 
         if(!File.Exists(dbDir+dbFile)) {
             Directory.CreateDirectory(dbDir);
-            File.Create(dbDir+dbFile);
-            ExecuteSql("CREATE TABLE IF NOT EXISTS players (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, level TEXT, position_x FLOAT, position_y FLOAT, gold INTEGER);");
+            // File.Create(dbDir+dbFile);
+            SqliteConnection.CreateFile(dbDir+dbFile);
         }
+
+        ExecuteSql("CREATE TABLE IF NOT EXISTS players (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, level TEXT, position_x FLOAT, position_y FLOAT, gold INTEGER);");
     }
 
     public PlayerDTO GetCurrentPlayer() {
