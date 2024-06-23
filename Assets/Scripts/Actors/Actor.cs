@@ -82,6 +82,9 @@ public class Actor : MonoBehaviour {
         facingLeft.x *= -1;
 
         GlobalAudioSource = GameObject.Find("AudioManager").GetComponent<AudioManager>().SfxSource;
+        GlobalAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
+        MainAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
+        SecondaryAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
     }
 
     public void Damaged(int damage) {

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -135,6 +136,30 @@ public class Adventurer : Actor {
         PlayAudio(AttackSFX);
         isAttacking = false;
         EnableInput();
+    }
+
+    new protected void EndDying() {
+        animator.SetBool("isDying", false);
+
+        DropAmount = Wealth;
+
+        if(Droppable != null) {
+            for(var i = 0; i < DropAmount; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
+        }
+        PlayAudioGlobally(DroppableSFX);
+
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn() {
+        yield return new WaitForSeconds(6);
+        gameObject.SetActive(false);
+        Destroy(this);
+        SaveManager.GetInstance().GoToLatestProgress();
+        
     }
 
     new void EndSliding() {
