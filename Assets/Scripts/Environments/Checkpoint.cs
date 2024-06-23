@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class Checkpoint : MonoBehaviour
     private Animator animator;
     [SerializeField] private Collider2D playerDetect;
     private CheckpointState state = CheckpointState.Inactive;
+    private Adventurer adventurer = null;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -22,13 +25,13 @@ public class Checkpoint : MonoBehaviour
         Physics2D.OverlapCollider(playerDetect, new ContactFilter2D(), colliders);
         foreach(var collider in colliders) {
             if(collider.GetComponent<Adventurer>() != null) {
-                Debug.Log("Player Detected");
+                adventurer = collider.GetComponent<Adventurer>();
                 return true;
             }
         }
         return false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         switch (state)
         {
@@ -37,6 +40,8 @@ public class Checkpoint : MonoBehaviour
                 {
                     state = CheckpointState.Active;
                     animator.SetTrigger("Activate");
+                    var s = SceneManager.GetActiveScene().name;
+                    SaveManager.GetInstance().SaveProgress(s, new Vector3(transform.position.x, transform.position.y + 3f), adventurer.Wealth);
                 }
                 break;
             case CheckpointState.Active:
