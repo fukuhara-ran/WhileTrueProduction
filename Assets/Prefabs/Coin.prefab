@@ -184,8 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 259465257119173989}
+  PlayerDetectorCollision: {fileID: 901177679359723248}
+  CollectedSFX: {fileID: 8300000, guid: 8181f6a5d2215d04a917e6f2e4b9f687, type: 3}
   MinX: 4
   MaxX: 8
   MinY: 8
   MaxY: 12
-  PlayerDetectorCollision: {fileID: 901177679359723248}

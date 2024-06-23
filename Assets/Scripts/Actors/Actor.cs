@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Actor : MonoBehaviour {
-    [SerializeField] protected int HealthPoint = 100;
+    [SerializeField] public int HealthPoint = 100;
     [SerializeField] protected int StaminaPoint = 100;
     [SerializeField] protected int Damage = 33;
     [SerializeField] protected float speed = 4f;
@@ -24,6 +25,7 @@ public class Actor : MonoBehaviour {
     protected Vector3 facingRight;
     protected Vector3 facingLeft;
     protected float nextAttack;
+    protected bool IsGroundedBefore;
 
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Transform groundCheck;
@@ -31,10 +33,57 @@ public class Actor : MonoBehaviour {
     [SerializeField] protected Collider2D AttackCollider;
     [SerializeField] protected Animator animator;
 
+    [SerializeField] protected AudioSource WalkAudioSource;
+    [SerializeField] protected AudioSource MainAudioSource;
+    [SerializeField] protected AudioSource SecondaryAudioSource;
+    protected AudioSource GlobalAudioSource;
+    [SerializeField] protected AudioClip AttackSFX;
+    [SerializeField] protected AudioClip AttackedSFX;
+    [SerializeField] protected AudioClip DieSFX;
+    [SerializeField] protected AudioClip JumpSFX;
+    [SerializeField] protected AudioClip FallSFX;
+    [SerializeField] protected AudioClip DroppableSFX;
+
+    [SerializeField] protected Collectible Droppable;
+    [SerializeField] protected int DropAmount = 1;
+
+
+    protected void PlayWalkAudio() {
+        // Debug.Log((isMovingRight || isMovingLeft)+" "+IsGrounded());
+        if((isMovingRight || isMovingLeft) && IsGrounded()) {
+            WalkAudioSource.enabled = true;
+            // Debug.Log("Walking Audio plays");
+        } else {
+            WalkAudioSource.enabled = false;
+        }
+    }
+
+    protected void PlayAudio(AudioClip audioClip) {
+        if(!MainAudioSource.isPlaying) {
+            Debug.Log(tag+" MainAudioSource is playing");
+            MainAudioSource.clip = audioClip;
+            MainAudioSource.Play();
+        } else if(!SecondaryAudioSource.isPlaying){
+            Debug.Log(tag+" SecondaryAudioSource is playing");
+            SecondaryAudioSource.clip = audioClip;
+            SecondaryAudioSource.Play();
+        } else {
+            Debug.Log(tag+" Too many audio play at the same time");
+        }
+    }
+    
+    protected void PlayAudioGlobally(AudioClip audioClip) {
+        Debug.Log(tag+" GlobalAudioSource is playing");
+        GlobalAudioSource.clip = audioClip;
+        GlobalAudioSource.Play();
+    }
+
     void Start() {
         facingRight = transform.localScale;
         facingLeft = facingRight;
         facingLeft.x *= -1;
+
+        GlobalAudioSource = GameObject.Find("AudioManager").GetComponent<AudioManager>().SfxSource;
     }
 
     public void Damaged(int damage) {
@@ -62,18 +111,44 @@ public class Actor : MonoBehaviour {
 
     protected void EndAttacking() {
         animator.SetBool("isAttacking", false);
+        PlayAudio(AttackSFX);
         isAttacking = false;
     }
 
     protected void Attacked() {
         if(isAttacking) return;
         animator.SetBool("isAttacked", true);
+
+        PlayAudio(AttackedSFX);
+
         isAttacked = true;
     }
 
     protected void EndAttacked() {
         animator.SetBool("isAttacked", false);
         isAttacked = false;
+    }
+
+    protected void Die() {
+        if(!animator.GetBool("isDying")) PlayAudio(DieSFX);
+        animator.SetBool("isDying", true);
+    }
+
+    protected void EndDying() {
+        animator.SetBool("isDying", false);
+
+        if(DropAmount < 1) DropAmount = UnityEngine.Random.Range(4,10);
+
+        if(this is Adventurer) DropAmount = (this as Adventurer).Wealth;
+
+        if(Droppable != null) {
+            for(var i = 0; i < DropAmount; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
+        }
+
+        PlayAudioGlobally(DroppableSFX);
+
+        gameObject.SetActive(false);
+        Destroy(this);
     }
 
     protected void Move(float multiplier) {
@@ -104,5 +179,14 @@ public class Actor : MonoBehaviour {
 
     protected void EndSliding() {
         animator.SetBool("isSliding", false);
+    }
+
+    protected void Reset() {
+        isMovingLeft = false;
+        isMovingRight = false;
+        isAttacking = false;
+        isAttacked = false;
+        isJumping = false;
+        horizontal = 0;
     }
 }

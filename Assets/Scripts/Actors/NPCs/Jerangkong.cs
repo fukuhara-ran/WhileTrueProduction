@@ -7,7 +7,7 @@ public class Jerangkong : Enemy {
     {
         if(HealthPoint < 1) {
             Die();
-            isAttacking = false;
+            return;
         }
         Reset();
         
@@ -46,6 +46,7 @@ public class Jerangkong : Enemy {
         Move(horizontal);
         
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+        PlayWalkAudio();
     }
 
     new private void GetPlayer() {
@@ -76,14 +77,5 @@ public class Jerangkong : Enemy {
         if(UnityEngine.Random.Range(1,10) < 5) {
             isAttacking = true;
         }
-    }
-
-    private void Reset() {
-        isMovingLeft = false;
-        isMovingRight = false;
-        // isAttacking = false;
-        isAttacked = false;
-        isJumping = false;
-        horizontal = 0;
     }
 }

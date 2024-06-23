@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class Adventurer : Actor {
@@ -34,6 +35,14 @@ public class Adventurer : Actor {
     }
 
     void FixedUpdate() {
+
+        if(HealthPoint < 1) {
+            horizontal = 0f;
+            Reset();
+            Die();
+            return;
+        }
+
         //Movement
         if (isMovingRight) {
             horizontal = 1f;
@@ -64,6 +73,7 @@ public class Adventurer : Actor {
             if (IsGrounded() || canDoubleJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                PlayAudio(JumpSFX);
                 isJumping = false;
                 canDoubleJump = !canDoubleJump;
             }
@@ -87,8 +97,15 @@ public class Adventurer : Actor {
 
         //Animation
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
+        PlayWalkAudio();
+
         animator.SetBool("isJumping", rb.velocity.y > 0);
         animator.SetBool("isFalling", rb.velocity.y < 0);
+
+        if(IsGroundedBefore == false && IsGroundedBefore != IsGrounded()) {
+            PlayAudio(FallSFX);
+        }
+        IsGroundedBefore = IsGrounded();
     }
 
     public void addWealth() {

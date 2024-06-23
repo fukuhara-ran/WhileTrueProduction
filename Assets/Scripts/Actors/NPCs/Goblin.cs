@@ -62,13 +62,4 @@ public class Goblin : Enemy {
         
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
     }
-
-    private void Reset() {
-        isMovingLeft = false;
-        isMovingRight = false;
-        // isAttacking = false;
-        isAttacked = false;
-        isJumping = false;
-        horizontal = 0;
-    }
 }
