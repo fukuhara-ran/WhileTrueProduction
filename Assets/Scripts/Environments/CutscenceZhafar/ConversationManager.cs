@@ -8,8 +8,8 @@ public class ConversationManager : MonoBehaviour
     {
         switch (id)
         {
-            case "bab1":
-                Bab1();
+            case "bab1a":
+                Bab1a();
                 break;
             case "bab2":
                 Bab2();
@@ -18,11 +18,11 @@ public class ConversationManager : MonoBehaviour
                 break;
         }
     }
-    public void Bab1()
+    public void Bab1a()
     {
         Conversation conversation = new Conversation();
-        conversation.Enqueue("Helena", "I feel like our mission is getting more challenging, Ash. But I'm glad I could do it with you.");
-        conversation.Enqueue("Ash", "I feel the same way, Helena. I'm glad you're here with me.");
+        conversation.Enqueue("Ash", "Who's there?");
+        conversation.Enqueue("Ash", "Show yourself! you fucking bitch!");
         dialogManager.LoadConversation(conversation);
     }
     public void Bab2()
