@@ -69,13 +69,4 @@ public class Dajjal : Enemy {
                     new Vector3(transform.position.x + (isFacingRight ? 2:-2), transform.position.y),
                     Quaternion.Euler(new Vector3(0, 0, isFacingRight?90:-90)));
     }
-
-    private void Reset() {
-        isMovingLeft = false;
-        isMovingRight = false;
-        // isAttacking = false;
-        isAttacked = false;
-        isJumping = false;
-        horizontal = 0;
-    }
 }

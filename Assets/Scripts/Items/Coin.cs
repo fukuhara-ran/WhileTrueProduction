@@ -9,6 +9,7 @@ public class Coin : Collectible {
     
     void OnEnable() {
         rb.velocity = new Vector2(Random.Range(MinX,MaxX), Random.Range(MinY,MaxY));
+        GlobalAudioSource = GameObject.Find("AudioManager").GetComponent<AudioManager>().SfxSource;
     }
 
     void FixedUpdate() {
