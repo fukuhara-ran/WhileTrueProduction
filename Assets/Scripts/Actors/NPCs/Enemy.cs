@@ -5,28 +5,8 @@ using UnityEngine;
 
 public class Enemy : Actor {
 
-    [SerializeField] protected Collectible Droppable;
-
     [SerializeField] protected Adventurer adventurer;
     [SerializeField] public Collider2D PlayerDetectorCollision;
-    [SerializeField] protected int DropAmount = 1;
-
-    protected void Die() {
-        animator.SetBool("isDying", true);
-    }
-
-    protected void EndDying() {
-        animator.SetBool("isDying", false);
-
-        if(DropAmount < 1) DropAmount = UnityEngine.Random.Range(4,10);
-
-        if(Droppable != null) {
-            for(var i = 0; i < DropAmount; i++) Instantiate(Droppable, transform.position, Quaternion.identity);
-        }
-
-        gameObject.SetActive(false);
-        Destroy(this);
-    }
 
     protected void GetPlayer() {
         if(adventurer != null) return;
@@ -49,5 +29,14 @@ public class Enemy : Actor {
         }
 
         return false;
+    }
+
+    new private void Reset() {
+        isMovingLeft = false;
+        isMovingRight = false;
+        // isAttacking = false;
+        isAttacked = false;
+        isJumping = false;
+        horizontal = 0;
     }
 }
