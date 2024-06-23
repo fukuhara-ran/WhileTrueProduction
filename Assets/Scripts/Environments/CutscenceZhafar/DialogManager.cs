@@ -9,7 +9,7 @@ public class DialogManager : MonoBehaviour
     public float delayBetweenDialogs = 1f;
     public Dialog currentDialog;
     private Conversation conversation;
-    public bool isInitial = false;
+    private bool isInitial = false;
     public static DialogManager Instance { get; private set; }
     private void Awake()
     {
@@ -46,9 +46,12 @@ public class DialogManager : MonoBehaviour
     }
     public void Update()
     {
-        if (conversation.IsEmpty() && !typingEffect.isTyping)
+        if (conversation.IsEmpty())
         {
-            Debug.Log("End of conversation");
+            if (!typingEffect.isTyping)
+            {
+                Debug.Log("End of conversation");
+            }
             return;
         }
 
@@ -56,6 +59,7 @@ public class DialogManager : MonoBehaviour
         {
             NextDialog();
             isInitial = false;
+            return;
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -67,9 +71,10 @@ public class DialogManager : MonoBehaviour
             else
             {
                 NextDialog();
+                delayBetweenDialogs = 1f;
             }
         }
-        if (!typingEffect.isTyping && !conversation.IsEmpty())
+        else if (!typingEffect.isTyping && !conversation.IsEmpty())
         {
             delayBetweenDialogs -= Time.deltaTime;
             if (delayBetweenDialogs <= 0)
