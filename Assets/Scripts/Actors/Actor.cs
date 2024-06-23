@@ -48,11 +48,9 @@ public class Actor : MonoBehaviour {
     [SerializeField] protected int DropAmount = 1;
 
 
-    protected void PlayWalkAudio() {
-        // Debug.Log((isMovingRight || isMovingLeft)+" "+IsGrounded());
-        if((isMovingRight || isMovingLeft) && IsGrounded()) {
+    protected void PlayWalkAudio(bool playForever=false) {
+        if(((isMovingRight || isMovingLeft) && IsGrounded()) || playForever) {
             WalkAudioSource.enabled = true;
-            // Debug.Log("Walking Audio plays");
         } else {
             WalkAudioSource.enabled = false;
         }

@@ -9,6 +9,8 @@ public class Zorath : Enemy {
 
     private Enemy currentBocil;
 
+    [SerializeField] private AudioClip SummonSFX;
+
     void FixedUpdate()
     {
         if(HealthPoint < 1) {
@@ -74,7 +76,7 @@ public class Zorath : Enemy {
 
     private void Spawn() {
         animator.SetBool("isSpawning", true);
-        
+        PlayAudio(SummonSFX);
     }
 
     private void EndSpawning() {
@@ -85,7 +87,7 @@ public class Zorath : Enemy {
         currentBocil = Instantiate(spawnNow, new Vector3(transform.position.x + (isFacingRight ? 4f:-4f), transform.position.y), Quaternion.identity);
     }
 
-    private void Reset() {
+    new private void Reset() {
         isMovingLeft = false;
         isMovingRight = false;
         isAttacking = false;
