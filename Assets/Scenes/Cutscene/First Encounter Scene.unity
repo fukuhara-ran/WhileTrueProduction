@@ -532,24 +532,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Events:
     m_Signals:
-    - {fileID: 11400000, guid: aceaed777eb11484fb86336b7004603d, type: 2}
     - {fileID: 11400000, guid: e01c2cd744d47ce4faeb47efa38ebd71, type: 2}
     - {fileID: 11400000, guid: 5edcbee1321c0dc4498634b3096c7a54, type: 2}
+    - {fileID: 11400000, guid: 1621ffc051a71b84a8be8329d5b51abd, type: 2}
+    - {fileID: 11400000, guid: 2548d9b7f5d214048b3fe31ba3e7bdd2, type: 2}
+    - {fileID: 11400000, guid: be2ce821c8e07b74490e7865ee077db6, type: 2}
     m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 864086273}
-          m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
-          m_MethodName: SetConversation
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: bab1a
-            m_BoolArgument: 0
-          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1814363197}
@@ -576,6 +564,48 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 864086273}
+          m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
+          m_MethodName: SetConversation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bab1a
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 864086273}
+          m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
+          m_MethodName: SetConversation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bab1b
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 864086273}
+          m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
+          m_MethodName: SetConversation
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bab1c
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &212836617
@@ -2666,6 +2696,10 @@ PrefabInstance:
     - target: {fileID: 3454404265958616946, guid: dce0e2e3a6edbf0459cbce7c3aa675e1, type: 3}
       propertyPath: m_Name
       value: DialogSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859882700218582325, guid: dce0e2e3a6edbf0459cbce7c3aa675e1, type: 3}
+      propertyPath: typingSpeed
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6458283670232446419, guid: dce0e2e3a6edbf0459cbce7c3aa675e1, type: 3}
       propertyPath: m_Color.a

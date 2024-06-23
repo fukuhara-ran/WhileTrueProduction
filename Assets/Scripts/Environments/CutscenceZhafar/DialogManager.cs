@@ -4,13 +4,22 @@ using System.Runtime.InteropServices;
 
 public class DialogManager : MonoBehaviour
 {
+    public enum DialogState
+    {
+        Idle,
+        Typing,
+        WaitingForInput,
+        Transitioning
+    }
+
     public TypingEffect typingEffect;
     public float typingSpeed = 0.05f;
-    public float delayBetweenDialogs = 1f;
+    public float delayBetweenDialogs = 2f;
     public Dialog currentDialog;
     private Conversation conversation;
-    public bool isInitial = false;
+    [SerializeField] private DialogState currentState = DialogState.Idle;
     public static DialogManager Instance { get; private set; }
+    
     private void Awake()
     {
         if (Instance == null)
@@ -22,61 +31,85 @@ public class DialogManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void Start()
     {
         conversation = new Conversation();
     }
+
     public void LoadConversation(Conversation newConversation)
     {
         conversation = newConversation;
+        currentState = DialogState.Idle;
     }
 
     public void StartNewDialogueSequence()
     {
         typingEffect.SetText("");
         typingEffect.SetName("");
-        isInitial = true;
-
+        currentState = DialogState.Transitioning;
     }
+
     public void StopDialogue()
     {
         typingEffect.SetText("");
         typingEffect.SetName("");
         conversation.Clear();
+        currentState = DialogState.Idle;
     }
+
     public void Update()
     {
-        if (conversation.IsEmpty() && !typingEffect.isTyping)
+        switch (currentState)
         {
-            Debug.Log("End of conversation");
-            return;
-        }
+            case DialogState.Idle:
+                if (!conversation.IsEmpty())
+                {
+                    //currentState = DialogState.Transitioning;
+                }
+                break;
 
-        if (isInitial)
-        {
-            NextDialog();
-            isInitial = false;
-        }
+            case DialogState.Typing:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    typingEffect.SkipTyping();
+                    currentState = DialogState.WaitingForInput;
+                }
+                else if (!typingEffect.isTyping)
+                {
+                    currentState = DialogState.WaitingForInput;
+                }
+                break;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (typingEffect.isTyping)
-            {
-                typingEffect.SkipTyping();
-            }
-            else
-            {
-                NextDialog();
-            }
-        }
-        if (!typingEffect.isTyping && !conversation.IsEmpty())
-        {
-            delayBetweenDialogs -= Time.deltaTime;
-            if (delayBetweenDialogs <= 0)
-            {
-                NextDialog();
-                delayBetweenDialogs = 1f;
-            }
+            case DialogState.WaitingForInput:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    currentState = DialogState.Transitioning;
+                    delayBetweenDialogs = 2f;
+                }
+                else
+                {
+                    delayBetweenDialogs -= Time.deltaTime;
+                    if (delayBetweenDialogs <= 0)
+                    {
+                        currentState = DialogState.Transitioning;
+                        delayBetweenDialogs = 2f;
+                    }
+                }
+                break;
+
+            case DialogState.Transitioning:
+                if (conversation.IsEmpty())
+                {
+                    Debug.Log("End of conversation");
+                    currentState = DialogState.Idle;
+                }
+                else
+                {
+                    NextDialog();
+                    currentState = DialogState.Typing;
+                }
+                break;
         }
     }
 
