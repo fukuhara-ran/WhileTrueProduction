@@ -1206,6 +1206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typingEffect: {fileID: 1979958925}
   typingSpeed: 0.05
+  isInitial: 0
 --- !u!4 &870677903
 Transform:
   m_ObjectHideFlags: 0
@@ -2283,8 +2284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818f940d534fcc0439e02a042af33f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: {fileID: 0}
-  typeSpeed: 0.05
 --- !u!1 &1936889988
 GameObject:
   m_ObjectHideFlags: 0
