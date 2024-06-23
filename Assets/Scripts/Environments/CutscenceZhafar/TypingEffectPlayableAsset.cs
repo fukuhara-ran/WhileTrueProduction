@@ -32,12 +32,11 @@ public class TypingEffectPlayableBehaviour : PlayableBehaviour
     public string dialogueText;
     public string dialogueName;
     public float typingSpeed;
-    public bool wasActive = false;
+    private bool wasActive = false;
 
     public override void PrepareFrame(Playable playable, FrameData info)
     {
-        if (typingEffect == null) return;
-        if (dialogManager == null) return;
+        if (typingEffect == null || dialogManager == null) return;
 
         bool isActive = playable.GetGraph().IsPlaying() &&
                         playable.GetTime() >= 0 &&
@@ -49,15 +48,17 @@ public class TypingEffectPlayableBehaviour : PlayableBehaviour
             int characterCount = Mathf.FloorToInt(normalizedTime * dialogueText.Length);
             string visibleText = dialogueText.Substring(0, Mathf.Clamp(characterCount, 0, dialogueText.Length));
             typingEffect.SetText(visibleText);
+            typingEffect.SetName(dialogueName);
             wasActive = true;
         }
         else if (wasActive)
         {
-            // Clear the text when the playable becomes inactive
             typingEffect.SetText("");
+            typingEffect.SetName("");
             wasActive = false;
         }
     }
+
     public override void OnPlayableCreate(Playable playable)
     {
         if (dialogManager != null)
@@ -65,7 +66,6 @@ public class TypingEffectPlayableBehaviour : PlayableBehaviour
             dialogueText = dialogManager.currentDialog.Text;
             dialogueName = dialogManager.currentDialog.Name;
         }
-        base.OnPlayableCreate(playable);
     }
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)
