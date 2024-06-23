@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Actor : MonoBehaviour {
-    [SerializeField] protected int HealthPoint = 100;
+    [SerializeField] public int HealthPoint = 100;
     [SerializeField] protected int StaminaPoint = 100;
     [SerializeField] protected int Damage = 33;
     [SerializeField] protected float speed = 4f;
