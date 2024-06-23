@@ -661,6 +661,7 @@ MonoBehaviour:
   - {fileID: 300402823948287449, guid: 8add4db0d6cec544f81159fbc5fc2c69, type: 3}
   - {fileID: 4189778150076542367, guid: 7c69ec4aaaee4aa4998217f6207e99de, type: 3}
   - {fileID: 8733054578705485751, guid: 8a4254645f26111408d7294c4c3ca0be, type: 3}
+  SummonSFX: {fileID: 8300000, guid: 7816c9993d0926641922d25ebc0f8f86, type: 3}
 --- !u!1 &8251433721412523239
 GameObject:
   m_ObjectHideFlags: 0

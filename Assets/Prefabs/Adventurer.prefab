@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7355b65353770324d98ebec5ea74d224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPoint: 100
+  HealthPoint: 300
   StaminaPoint: 100
   Damage: 33
   speed: 5

@@ -92,6 +92,9 @@ public class Actor : MonoBehaviour {
     protected void Attack() {
         onAttacking.Invoke();
         animator.SetBool("isAttacking", true);
+    }
+
+    protected void EndAttacking() {
         List<Collider2D> actors = new();
         Physics2D.OverlapCollider(AttackCollider, contactFilter2D, actors);
 
@@ -100,14 +103,8 @@ public class Actor : MonoBehaviour {
                 actor.transform.GetComponent<Actor>().Damaged(Damage);
                 continue;
             }
-
-            if(actor.GetComponent<FireBall>() != null) {
-                actor.transform.GetComponent<FireBall>().Reverse();
-            }
         }
-    }
 
-    protected void EndAttacking() {
         animator.SetBool("isAttacking", false);
         PlayAudio(AttackSFX);
         isAttacking = false;
