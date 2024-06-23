@@ -7,7 +7,7 @@ public class DialogueMixerBehaviour : PlayableBehaviour
 {
     private List<Playable> activePlayables = new List<Playable>();
     private DialogueManager dialogueManager;
-    private string currentDialogue = "";
+    private DialogueLine currentDialogueLine = new DialogueLine("", "");
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
@@ -28,10 +28,10 @@ public class DialogueMixerBehaviour : PlayableBehaviour
                 if (!activePlayables.Contains(inputPlayable))
                 {
                     activePlayables.Add(inputPlayable);
-                    if (input.dialogueText != currentDialogue)
+                    if (input.dialogueText != currentDialogueLine.dialogueText || input.characterName != currentDialogueLine.characterName)
                     {
-                        currentDialogue = input.dialogueText;
-                        dialogueManager.StartDialogue(new List<string> { currentDialogue });
+                        currentDialogueLine = new DialogueLine(input.characterName, input.dialogueText);
+                        dialogueManager.StartDialogue(new List<DialogueLine> { currentDialogueLine });
                     }
                 }
             }
@@ -48,7 +48,7 @@ public class DialogueMixerBehaviour : PlayableBehaviour
         if (activePlayables.Count == 0)
         {
             dialogueManager.EndDialogue();
-            currentDialogue = "";
+            currentDialogueLine = new DialogueLine("", "");
         }
     }
 }
