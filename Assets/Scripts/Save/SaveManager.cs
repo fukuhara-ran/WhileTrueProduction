@@ -30,11 +30,34 @@ public class SaveManager {
 
         if(!File.Exists(dbDir+dbFile)) {
             Directory.CreateDirectory(dbDir);
-            // File.Create(dbDir+dbFile);
             SqliteConnection.CreateFile(dbDir+dbFile);
         }
 
         ExecuteSql("CREATE TABLE IF NOT EXISTS players (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, level TEXT, position_x FLOAT, position_y FLOAT, gold INTEGER);");
+        ExecuteSql("CREATE TABLE IF NOT EXISTS prefs (id INTEGER PRIMARY KEY, name TEXT UNIQUE, value FLOAT);");
+    }
+
+    public void SavePref(string name, float value) {
+        ExecuteSql(String.Format("INSERT OR REPLACE INTO players (id, name, value, level) VALUES (NULL, '{0}', {1});", name, value));
+    }
+
+    public float ReadPref(string name) {
+        float value = 1;
+        using var connection = new SqliteConnection(dbUri);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = string.Format("SELECT * FROM prefs WHERE name = '{0}'", name);
+        using var reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            value = reader.GetFloat(2);
+        }
+        reader.Close();
+        connection.Close();
+
+        return value;
     }
 
     public PlayerDTO GetCurrentPlayer() {

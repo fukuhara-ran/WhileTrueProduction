@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MusicSource.volume = SaveManager.GetInstance().ReadPref("MusicVolume");
+        SfxSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
         MusicSource.clip = soundtrack;
         MusicSource.Play();
     }

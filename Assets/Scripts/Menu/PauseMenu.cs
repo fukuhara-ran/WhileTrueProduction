@@ -144,8 +144,11 @@ public class PauseMenu : MonoBehaviour
 
     void SaveVolumeSettings()
     {
+        Debug.Log("Saving...");
         PlayerPrefs.SetFloat("MusicVolume", backgroundMusic.volume);
         PlayerPrefs.SetFloat("SFXVolume", sfxAudioSource.volume);
+        SaveManager.GetInstance().SavePref("MusicVolume", backgroundMusic.volume);
+        SaveManager.GetInstance().SavePref("SFXVolume", sfxAudioSource.volume);
         PlayerPrefs.Save();
     }
 
