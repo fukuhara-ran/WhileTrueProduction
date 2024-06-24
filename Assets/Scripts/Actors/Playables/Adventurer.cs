@@ -29,6 +29,7 @@ public class Adventurer : Actor {
         EnableInput();
         if(SaveManager.GetInstance().GetCurrentPlayer() != null && SceneManager.GetActiveScene().name == SaveManager.GetInstance().GetCurrentPlayer().Level) {
             transform.position = SaveManager.GetInstance().GetCurrentPlayer().Position;
+            Wealth = SaveManager.GetInstance().GetCurrentPlayer().Gold;
         }
     }
 
