@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicSource: {fileID: 865315738}
   SfxSource: {fileID: 1838358398}
-  soundtrack: {fileID: 0}
+  soundtrack: {fileID: 8300000, guid: dd5a5278796ad944da6f558d62b6c73d, type: 3}
 --- !u!4 &69098368
 Transform:
   m_ObjectHideFlags: 0
