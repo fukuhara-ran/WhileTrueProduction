@@ -142,7 +142,7 @@ public class PauseMenu : MonoBehaviour
         volumeImage.sprite = volumeSprites[index];
     }
 
-    void SaveVolumeSettings()
+    public void SaveVolumeSettings()
     {
         Debug.Log("Saving...");
         PlayerPrefs.SetFloat("MusicVolume", backgroundMusic.volume);
@@ -152,7 +152,7 @@ public class PauseMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void LoadVolumeSettings()
+    public void LoadVolumeSettings()
     {
         if (PlayerPrefs.HasKey("MusicVolume"))
         {

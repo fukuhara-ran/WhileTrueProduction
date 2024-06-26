@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class GoNext : MonoBehaviour
+public class ThisActorMustDie : MonoBehaviour
 {
     public string NextScene;
+    public Actor ActorThatMustDie;
     internal enum CheckpointState
     {
         Inactive, 
@@ -37,7 +39,7 @@ public class GoNext : MonoBehaviour
         switch (state)
         {
             case CheckpointState.Inactive:
-                if(IsPlayerDetected())
+                if(IsPlayerDetected() && ActorThatMustDie.IsDestroyed())
                 {
                     state = CheckpointState.Active;
                     animator.SetTrigger("Activate");

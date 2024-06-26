@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Actor : MonoBehaviour {
+    [SerializeField] public int FullHealthPoint = 100;
     [SerializeField] public int HealthPoint = 100;
     [SerializeField] protected int StaminaPoint = 100;
     [SerializeField] protected int Damage = 33;
@@ -58,15 +59,15 @@ public class Actor : MonoBehaviour {
 
     protected void PlayAudio(AudioClip audioClip) {
         if(!MainAudioSource.isPlaying) {
-            Debug.Log(tag+" MainAudioSource is playing");
+            // Debug.Log(tag+" MainAudioSource is playing");
             MainAudioSource.clip = audioClip;
             MainAudioSource.Play();
         } else if(!SecondaryAudioSource.isPlaying){
-            Debug.Log(tag+" SecondaryAudioSource is playing");
+            // Debug.Log(tag+" SecondaryAudioSource is playing");
             SecondaryAudioSource.clip = audioClip;
             SecondaryAudioSource.Play();
         } else {
-            Debug.Log(tag+" Too many audio play at the same time");
+            // Debug.Log(tag+" Too many audio play at the same time");
         }
     }
     
@@ -81,10 +82,12 @@ public class Actor : MonoBehaviour {
         facingLeft = facingRight;
         facingLeft.x *= -1;
 
-        GlobalAudioSource = GameObject.Find("AudioManager").GetComponent<AudioManager>().SfxSource;
+        GlobalAudioSource = GameObject.Find("Audio Manager").GetComponent<AudioManager>().SfxSource;
         GlobalAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
         MainAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
         SecondaryAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
+
+        HealthPoint = FullHealthPoint;
     }
 
     public void Damaged(int damage) {
