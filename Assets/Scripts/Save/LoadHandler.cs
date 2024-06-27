@@ -13,7 +13,7 @@ public class LoadHandler : MonoBehaviour {
     
     public void CreatePlayer() {
         SaveManager.GetInstance().Create(username.text, password.text);
-        ContinueGameProgress();
+        SceneManager.LoadScene("Prologue");
     }
 
     private void ContinueGameProgress() {
