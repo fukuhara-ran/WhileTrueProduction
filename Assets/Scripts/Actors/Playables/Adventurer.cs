@@ -112,8 +112,9 @@ public class Adventurer : Actor {
         }
 
         // Clamp velocity to prevent excessive speed
+        float absTargetSpeed = Mathf.Abs(targetSpeed);
         rb.velocity = new Vector2(
-            Mathf.Clamp(rb.velocity.x, -speed, speed),
+            Mathf.Clamp(rb.velocity.x, -absTargetSpeed, absTargetSpeed),
             rb.velocity.y
         );
 #endregion
