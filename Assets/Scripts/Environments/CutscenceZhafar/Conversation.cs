@@ -4,9 +4,16 @@ using System.Collections.Generic;
 public class Conversation
 {
     private Queue<Dialog> dialogs;
-    public Conversation()
+    private string audioTrack;
+    public string AudioTrack
+    {
+        get { return audioTrack; }
+        set { audioTrack = value; }
+    }
+    public Conversation(string audioTrack = "")
     {
         dialogs = new Queue<Dialog>();
+        this.audioTrack = audioTrack;
     }
     public void Enqueue(Dialog dialog)
     {
