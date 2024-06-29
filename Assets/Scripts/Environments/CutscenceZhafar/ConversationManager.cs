@@ -23,7 +23,7 @@ public class ConversationManager : MonoBehaviour
     }
     public void Bab1a()
     {
-        Conversation conversation = new Conversation();
+        Conversation conversation = new Conversation("bab1a");
         conversation.Enqueue("Helena", "Our mission grows more challenging by the day, Ash. Yet, I find joy in facing it alongside you");
         conversation.Enqueue("Ash", "Indeed, Helena. Together we make an exceptional team.");
         conversation.Enqueue("Ash", "Wait, do you sense that? Something's not right...");
@@ -32,7 +32,7 @@ public class ConversationManager : MonoBehaviour
     }
     public void Bab1b()
     {
-        Conversation conversation = new Conversation();
+        Conversation conversation = new Conversation("bab1b");
         conversation.Enqueue("Vargoth", "Ah, how delightful. Two brave adventurers, completely unaware of the doom that awaits them.");
         conversation.Enqueue("Helena", "What do you want from us?");
         conversation.Enqueue("Vargoth", "I desire power, chaos, and the suffering of those who dare to oppose me.");
@@ -42,7 +42,7 @@ public class ConversationManager : MonoBehaviour
     }
     public void Bab1c()
     {
-        Conversation conversation = new Conversation();
+        Conversation conversation = new Conversation("bab1c");
         conversation.Enqueue("Ash", "Helena, where are you?");
         conversation.Enqueue("Vargoth's Echo", "Your cries are in vain, young hero. She is beyond your reach now.");
         conversation.Enqueue("Ash", "I don't care what dark powers you wield, Vargoth. I will find you, and I will save her.");

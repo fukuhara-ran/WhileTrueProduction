@@ -75,7 +75,8 @@ public class SaveManager {
         CurrentActivePlayer.Gold = gold;
 
 
-        ExecuteSql(String.Format("INSERT OR REPLACE INTO players (id, username, password, level, position_x, position_y, gold) VALUES (NULL, '{0}', '{1}', '{2}', {3}, {4}, {5});",
+        ExecuteSql(String.Format(System.Globalization.CultureInfo.InvariantCulture, 
+        "INSERT OR REPLACE INTO players (id, username, password, level, position_x, position_y, gold) VALUES (NULL, '{0}', '{1}', '{2}', {3}, {4}, {5});",
         CurrentActivePlayer.Username,
         CurrentActivePlayer.Password,
         CurrentActivePlayer.Level,
