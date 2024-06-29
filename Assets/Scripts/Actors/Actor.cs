@@ -174,14 +174,6 @@ public class Actor : MonoBehaviour {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    protected void Slide() {
-
-    }
-
-    protected void EndSliding() {
-        animator.SetBool("isSliding", false);
-    }
-
     protected void Reset() {
         isMovingLeft = false;
         isMovingRight = false;
