@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Actor : MonoBehaviour {
     [SerializeField] public int FullHealthPoint = 100;
     [SerializeField] public int HealthPoint = 100;
-    [SerializeField] protected int StaminaPoint = 100;
+    [SerializeField] protected float StaminaPoint = 100;
     [SerializeField] protected int Damage = 33;
     [SerializeField] protected float speed = 4f;
     [SerializeField] protected float jumpingPower = 6f;
@@ -22,7 +22,7 @@ public class Actor : MonoBehaviour {
     protected bool isAttacking;
     [NonSerialized] public UnityEvent onAttacking = new();
     protected bool isAttacked;
-    protected float horizontal;
+    [SerializeField] protected float horizontal = 0f;
     protected Vector3 facingRight;
     protected Vector3 facingLeft;
     protected float nextAttack;
@@ -153,7 +153,7 @@ public class Actor : MonoBehaviour {
     }
 
     protected void Move(float multiplier) {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(multiplier * speed, rb.velocity.y);
     }
 
     protected void FlipRight() {

@@ -12,9 +12,9 @@ public class Adventurer : Actor {
     public InputAction DoAttack;
     public InputAction DoSlide;
 
-    public int JumpCost = 20;
-    public int AttackCost = 20;
-    public int SlideCost = 40;
+    public float JumpCost = 20;
+    public float AttackCost = 20;
+    public float SlideCost = 40;
 
     private int NPCLayer;
     private int PCLayer;
@@ -22,13 +22,17 @@ public class Adventurer : Actor {
     private bool isSlideRequested;
     private bool isSliding;
     private float slideEndTime;
-    private float slideDuration = 0.4f;
+    private float slideDuration = 0.2f;
     private float slideCooldown = 1.2f;
     private float lastSlideTime;
 
     private bool canDoubleJump;
 
     public int Wealth = 0;
+
+    [SerializeField] private float airControlFactor = 0.8f; // How much control in air (0-1)
+    [SerializeField] private float groundFriction = 1f; // How quickly to stop on ground
+    [SerializeField] private float stopThreshold = 0.01f;
 
     void OnEnable() {
         MapInput();
@@ -40,7 +44,7 @@ public class Adventurer : Actor {
     }
     private void Awake() {
         NPCLayer = LayerMask.NameToLayer("NPC");
-        PCLayer = LayerMask.NameToLayer("Player");
+        PCLayer = LayerMask.NameToLayer("PC");
     }
 
     void OnDisable() {
@@ -48,6 +52,7 @@ public class Adventurer : Actor {
     }
 
     void FixedUpdate() {
+        bool isGrounded = IsGrounded();
 
         if(HealthPoint < 1) {
             Reset();
@@ -64,27 +69,59 @@ public class Adventurer : Actor {
             horizontal = -1f;
             FlipLeft();
         }
+        else if (isSliding){
+            horizontal = isFacingRight ? 2f : -2f;
+        }
+        else if (isGrounded)
+        {
+            horizontal = 0f;
+        }
 
         Move(horizontal);
 
-        if(!IsGrounded()) {
-            if(horizontal > 0f) {
-                horizontal -= 0.01f;
-            }
+        float targetSpeed = horizontal * speed;
+        float speedDiff = targetSpeed - rb.velocity.x;
 
-            if(horizontal < 0f) {
-                horizontal += 0.01f;
-            } 
+        // Air control
+        if (!isGrounded)
+        {
+            float acceleration = speedDiff * airControlFactor;
+            rb.AddForce(acceleration * Vector2.right, ForceMode2D.Force);
         }
-        else if (!isSliding) {
-            horizontal = 0f;
+        // Ground movement
+        else if (!isSliding)
+        {
+            if (Mathf.Abs(horizontal) < 0.01f)
+            {
+                // Apply friction to stop
+                float frictionForce = -rb.velocity.x * groundFriction;
+                rb.AddForce(frictionForce * Vector2.right, ForceMode2D.Force);
+
+                // If velocity is very low, set it to zero to ensure a complete stop
+                if (Mathf.Abs(rb.velocity.x) < stopThreshold)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
+            }
+            else
+            {
+                // Move towards target speed
+                float acceleration = speedDiff * groundFriction;
+                rb.AddForce(acceleration * Vector2.right, ForceMode2D.Force);
+            }
         }
+
+        // Clamp velocity to prevent excessive speed
+        rb.velocity = new Vector2(
+            Mathf.Clamp(rb.velocity.x, -speed, speed),
+            rb.velocity.y
+        );
 #endregion
 
 #region jumping
         if (isJumping)
         {
-            if (IsGrounded() || canDoubleJump)
+            if (isGrounded || canDoubleJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 PlayAudio(JumpSFX);
@@ -92,7 +129,7 @@ public class Adventurer : Actor {
                 canDoubleJump = !canDoubleJump;
             }
         }
-        if (IsGrounded()) {
+        if (isGrounded) {
             canDoubleJump = true;
             }
 #endregion
@@ -114,10 +151,11 @@ public class Adventurer : Actor {
         }
 
         if (isSliding){
-            
+            Physics2D.IgnoreLayerCollision(gameObject.layer, NPCLayer, true);
+            DisableInput();
         }
         else {
-            
+            Physics2D.IgnoreLayerCollision(gameObject.layer, NPCLayer, false);
         }
 #endregion
 
@@ -193,7 +231,6 @@ public class Adventurer : Actor {
         slideEndTime = Time.time + slideDuration;
         lastSlideTime = Time.time;
         animator.SetBool("isSliding", true);
-        horizontal = transform.localScale.x > 0 ? 2f : -2f; // Slide in facing direction
         DisableInput();
     }
     private void EndSliding() {
