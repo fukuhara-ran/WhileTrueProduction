@@ -55,7 +55,7 @@ public class Adventurer : Actor {
             DisableInput();
         }
 
-        //Movement
+#region movement
         if (isMovingRight) {
             horizontal = 1f;
             FlipRight();
@@ -79,8 +79,9 @@ public class Adventurer : Actor {
         else if (!isSliding) {
             horizontal = 0f;
         }
+#endregion
 
-        //Jump
+#region jumping
         if (isJumping)
         {
             if (IsGrounded() || canDoubleJump)
@@ -91,15 +92,20 @@ public class Adventurer : Actor {
                 canDoubleJump = !canDoubleJump;
             }
         }
+        if (IsGrounded()) {
+            canDoubleJump = true;
+            }
+#endregion
 
-        //Attack
+#region attack
         if(isAttacking && Time.time >= nextAttack) {
             nextAttack = Time.time + attackCD;
             Attack();
             DisableInput();
         }
+#endregion
 
-        //Slide
+#region slide
         if (isSlideRequested && canSlide()) {
             StartSlide();
         }
@@ -113,6 +119,7 @@ public class Adventurer : Actor {
         else {
             
         }
+#endregion
 
         //Animation
         animator.SetBool("isMoving", isMovingRight || isMovingLeft);
@@ -189,12 +196,6 @@ public class Adventurer : Actor {
         horizontal = transform.localScale.x > 0 ? 2f : -2f; // Slide in facing direction
         DisableInput();
     }
-
-    // private void EndSlide() {
-    //     isSliding = false;
-    //     animator.SetBool("isSliding", false);
-    //     EnableInput();
-    // }
     private void EndSliding() {
         isSliding = false;
         animator.SetBool("isSliding", false);
