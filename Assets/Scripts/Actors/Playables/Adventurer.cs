@@ -16,11 +16,17 @@ public class Adventurer : Actor {
     public int AttackCost = 20;
     public int SlideCost = 40;
 
+    private int NPCLayer;
+    private int PCLayer;
+
+    private bool isSlideRequested;
     private bool isSliding;
+    private float slideEndTime;
+    private float slideDuration = 0.4f;
+    private float slideCooldown = 1.2f;
+    private float lastSlideTime;
+
     private bool canDoubleJump;
-    private float nextSlide;
-    private float slideCD = 1f;
-    private bool isStillSliding;
 
     public int Wealth = 0;
 
@@ -31,6 +37,10 @@ public class Adventurer : Actor {
             transform.position = SaveManager.GetInstance().GetCurrentPlayer().Position;
             Wealth = SaveManager.GetInstance().GetCurrentPlayer().Gold;
         }
+    }
+    private void Awake() {
+        NPCLayer = LayerMask.NameToLayer("NPC");
+        PCLayer = LayerMask.NameToLayer("Player");
     }
 
     void OnDisable() {
@@ -65,8 +75,9 @@ public class Adventurer : Actor {
             if(horizontal < 0f) {
                 horizontal += 0.01f;
             } 
-        } else if(!isStillSliding){
-            horizontal = 0;
+        }
+        else if (!isSliding) {
+            horizontal = 0f;
         }
 
         //Jump
@@ -89,12 +100,18 @@ public class Adventurer : Actor {
         }
 
         //Slide
-        if(isSliding && Time.time >= nextSlide) {
-            nextSlide = Time.time + slideCD;
-            animator.SetBool("isSliding", false);
-            horizontal = isMovingLeft ? -2f : 2f;
-            isStillSliding = true;
-            DisableInput();
+        if (isSlideRequested && canSlide()) {
+            StartSlide();
+        }
+        if (isSliding && Time.time >= slideEndTime) {
+            EndSliding();
+        }
+
+        if (isSliding){
+            
+        }
+        else {
+            
         }
 
         //Animation
@@ -163,9 +180,24 @@ public class Adventurer : Actor {
         
     }
 
-    new void EndSliding() {
+    private void StartSlide() {
+        isSliding = true;
+        isSlideRequested = false;
+        slideEndTime = Time.time + slideDuration;
+        lastSlideTime = Time.time;
+        animator.SetBool("isSliding", true);
+        horizontal = transform.localScale.x > 0 ? 2f : -2f; // Slide in facing direction
+        DisableInput();
+    }
+
+    // private void EndSlide() {
+    //     isSliding = false;
+    //     animator.SetBool("isSliding", false);
+    //     EnableInput();
+    // }
+    private void EndSliding() {
+        isSliding = false;
         animator.SetBool("isSliding", false);
-        isStillSliding = false;
         EnableInput();
     }
 
@@ -182,8 +214,8 @@ public class Adventurer : Actor {
         DoAttack.performed += (InputAction.CallbackContext context) =>{isAttacking = true;};
         DoAttack.canceled += (InputAction.CallbackContext context) =>{isAttacking = false;};
 
-        DoSlide.performed += (InputAction.CallbackContext context) => {isSliding = true;};
-        DoSlide.canceled += (InputAction.CallbackContext context) => {isSliding = false;};
+        DoSlide.performed += (InputAction.CallbackContext context) => { isSlideRequested = true; };
+        DoSlide.canceled += (InputAction.CallbackContext context) => { isSlideRequested = false; };
     }
 
     private void EnableInput() {
@@ -200,5 +232,8 @@ public class Adventurer : Actor {
         DoJump.Disable();
         DoAttack.Disable();
         DoSlide.Disable();
+    }
+    private bool canSlide() {
+        return Time.time >= lastSlideTime + slideCooldown && !isJumping && !isAttacking && IsGrounded() && (isMovingRight || isMovingLeft);
     }
 }

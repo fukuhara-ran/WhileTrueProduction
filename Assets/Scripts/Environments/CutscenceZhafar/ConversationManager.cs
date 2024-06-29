@@ -37,7 +37,7 @@ public class ConversationManager : MonoBehaviour
         conversation.Enqueue("Helena", "What do you want from us?");
         conversation.Enqueue("Vargoth", "I desire power, chaos, and the suffering of those who dare to oppose me.");
         conversation.Enqueue("Helena", "Whatever your aims are, we won't allow you to bring harm to these lands or its people.");
-        conversation.Enqueue("Ash", "Allow? My dear, you speak as if you have a choice in the matter. Your determination is admirable, if woefully misplaced.");
+        conversation.Enqueue("Vargoth", "Allow? My dear, you speak as if you have a choice in the matter. Your determination is admirable, if woefully misplaced.");
         dialogManager.LoadConversation(conversation);
     }
     public void Bab1c()
