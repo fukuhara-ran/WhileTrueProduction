@@ -5,7 +5,7 @@ public class Dajjal : Enemy {
     [SerializeField] private Projectile projectile;
     void FixedUpdate()
     {
-        if(HealthPoint < 1) {
+        if(healthManager.CurrentHealthPoint < 1) {
             rb.gravityScale = 0.5f;
             Die();
             isAttacking = false;

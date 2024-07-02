@@ -4,7 +4,7 @@ using UnityEngine;
 public class Mushroom : Enemy {
     void FixedUpdate()
     {
-        if(HealthPoint < 1) {
+        if(healthManager.CurrentHealthPoint < 1) {
             Die();
             isAttacking = false;
             animator.SetBool("isAttacked", false);

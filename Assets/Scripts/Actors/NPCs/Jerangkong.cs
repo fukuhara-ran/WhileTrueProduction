@@ -5,7 +5,7 @@ using UnityEngine;
 public class Jerangkong : Enemy {
     void FixedUpdate()
     {
-        if(HealthPoint < 1) {
+        if(healthManager.CurrentHealthPoint < 1) {
             Die();
             return;
         }

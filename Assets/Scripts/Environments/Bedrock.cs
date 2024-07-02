@@ -9,7 +9,7 @@ public class Bedrock : MonoBehaviour {
         Physics2D.OverlapCollider(playerDetect, new ContactFilter2D(), colliders);
         foreach(var collider in colliders) {
             var temp = collider.GetComponent<Actor>();
-            if(temp != null && temp.HealthPoint > 0) {
+            if(temp != null && temp.healthManager.CurrentHealthPoint > 0) {
                 temp.Damaged(9999);
             }
         }
