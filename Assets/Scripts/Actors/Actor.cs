@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Actor : MonoBehaviour {
-    [SerializeField] public int FullHealthPoint = 100;
-    [SerializeField] public int HealthPoint = 100;
+    public HealthManager healthManager;
     [SerializeField] protected float StaminaPoint = 100;
     [SerializeField] protected int Damage = 33;
     [SerializeField] protected float speed = 4f;
@@ -87,12 +86,13 @@ public class Actor : MonoBehaviour {
         MainAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
         SecondaryAudioSource.volume = SaveManager.GetInstance().ReadPref("SFXVolume");
 
-        HealthPoint = FullHealthPoint;
+        healthManager = new HealthManager(100);
+        healthManager.OnDamaged += Attacked;
+        healthManager.OnDied += Die;
     }
 
     public void Damaged(int damage) {
-        HealthPoint -= damage;
-        Attacked();
+        healthManager.TakeDamage(damage);
     }
 
     protected void Attack() {
@@ -117,7 +117,8 @@ public class Actor : MonoBehaviour {
     }
 
     protected void Attacked() {
-        if(isAttacking) return;
+        //if(isAttacking) return;
+        if (animator.GetBool("isAttacking")) return;
         animator.SetBool("isAttacked", true);
 
         PlayAudio(AttackedSFX);

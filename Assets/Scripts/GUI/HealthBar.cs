@@ -11,6 +11,6 @@ public class HealthBar : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        image.fillAmount = (float)adventurer.HealthPoint / adventurer.FullHealthPoint;
+        image.fillAmount = (float)adventurer.healthManager.CurrentHealthPoint / adventurer.healthManager.FullHealthPoint;
     }
 }

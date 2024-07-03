@@ -54,7 +54,7 @@ public class Adventurer : Actor {
     void FixedUpdate() {
         bool isGrounded = IsGrounded();
 
-        if(HealthPoint < 1) {
+        if(healthManager.CurrentHealthPoint < 1) {
             Reset();
             Die();
             DisableInput();

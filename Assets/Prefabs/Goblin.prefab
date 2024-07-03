@@ -203,7 +203,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 2}
+  m_Size: {x: 30, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &2579928311545159911
 GameObject:
@@ -779,12 +779,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66ff394c811fb143a04afc20993c188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullHealthPoint: 100
   HealthPoint: 100
   StaminaPoint: 100
   Damage: 33
   speed: 4
   jumpingPower: 6
   attackCD: 1
+  horizontal: 0
   rb: {fileID: 5080694894628818205}
   groundCheck: {fileID: 477302794792748451}
   groundLayer:
