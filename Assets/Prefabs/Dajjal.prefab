@@ -454,12 +454,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6bf747d4d4b554097cc891f83cab41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPoint: 100
   StaminaPoint: 100
   Damage: 33
   speed: 4
   jumpingPower: 6
   attackCD: 4
+  horizontal: 0
   rb: {fileID: 127102623625304950}
   groundCheck: {fileID: 7684543219095285180}
   groundLayer:
